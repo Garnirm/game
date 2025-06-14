@@ -1,0 +1,55 @@
+@use '../variables' as vars;
+
+.sidebar {
+    border-right: 2px solid rgba(197, 197, 197, 0.4);
+    height: 100%;
+    overflow-y: auto;
+    padding-top: 32px;
+    width: 250px;
+
+    .sidebar-block {
+        margin-bottom: 40px;
+
+        .block-header {
+            color: vars.$color-grey;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+            padding-left: 32px;
+            padding-right: 24px;
+        }
+
+        .block-item {
+            color: vars.$color-dark;
+            cursor: pointer;
+            font-weight: 500;
+            margin-left: 20px;
+            padding-bottom: 8px;
+            padding-left: 12px;
+            padding-right: 20px;
+            padding-top: 8px;
+
+            &:hover, &.selected {
+                background-color: rgba(93, 120, 231, 0.1);
+                border-right: 4px solid #5D78E7;
+            }
+        }
+
+        .block-item-link {
+            color: vars.$color-dark;
+            cursor: pointer;
+            display: block;
+            font-weight: 500;
+            margin-left: 20px;
+            padding-bottom: 8px;
+            padding-left: 12px;
+            padding-right: 20px;
+            padding-top: 8px;
+            width: calc(100% - 20px);
+
+            &:hover, &.active {
+                background-color: rgba(93, 120, 231, 0.1);
+                border-right: 4px solid #5D78E7;
+            }
+        }
+    }
+}

@@ -1,0 +1,16 @@
+includes:
+    - ./vendor/larastan/larastan/extension.neon
+
+parameters:
+    paths:
+        - app
+
+    level: 6
+
+    ignoreErrors:
+        - "#Called 'pluck' on Laravel collection, but could have been retrieved as a query.#"
+
+    excludePaths:
+        - app/Laravel
+
+    checkMissingIterableValueType: false

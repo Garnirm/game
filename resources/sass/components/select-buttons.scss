@@ -1,0 +1,46 @@
+@use '../variables' as vars;
+
+.select-buttons {
+    &.one-line {
+        display: flex;
+
+        .select-buttons-choice {
+            background-color: vars.$color-white;
+            border-bottom: 2px solid rgba(197, 197, 197, 0.4);
+            border-left: 2px solid rgba(197, 197, 197, 0.4);
+            border-top: 2px solid rgba(197, 197, 197, 0.4);
+
+            &:first-child {
+                border-top-left-radius: 8px;
+                border-bottom-left-radius: 8px;
+            }
+
+            &:last-child {
+                border-right: 2px solid rgba(197, 197, 197, 0.4);
+                border-top-right-radius: 8px;
+                border-bottom-right-radius: 8px;
+            }
+
+            &.selected {
+                background-color: blue;
+                color: white;
+                opacity: 0.8;
+            }
+
+            input[type=checkbox], input[type=radio] {
+                display: none;
+            }
+
+            label {
+                cursor: pointer;
+                display: block;
+                padding-bottom: 4px;
+                padding-left: 8px;
+                padding-right: 8px;
+                padding-top: 4px;
+                text-align: center;
+                user-select: none;
+            }
+        }
+    }
+}

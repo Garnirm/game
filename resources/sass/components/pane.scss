@@ -1,0 +1,62 @@
+@use '../variables' as vars;
+
+.pane-wrapper {
+    background-color: rgba(0, 0, 0, 0.05);
+    height: 100vh;
+    left: vars.$width-sidebar;
+    position: fixed;
+    top: 64px;
+    width: 100%;
+    z-index: 2;
+
+    &.pane-right {
+        .pane {
+            left: initial;
+            right: vars.$width-sidebar;
+        }
+    }
+
+    .pane {
+        background-color: white;
+        height: 100vh;
+        left: 0;
+        padding: 12px;
+        position: absolute;
+        top: 0;
+        width: 500px;
+        z-index: 3;
+
+        .pane-content, .pane-form {
+            margin-top: 16px;
+        }
+
+        .pane-header {
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+
+            .header-close {
+                display: flex;
+                width: 40px;
+
+                svg {
+                    padding-bottom: 2px;
+                    padding-left: 2px;
+                    padding-right: 2px;
+                    padding-top: 2px;
+                }
+
+                &:hover {
+                    svg {
+                        background-color: rgba(0, 0, 0, 0.3);
+                        border-radius: 50%;
+                    }
+                }
+            }
+
+            .header-label {
+                font-size: 28px;
+            }
+        }
+    }
+}
