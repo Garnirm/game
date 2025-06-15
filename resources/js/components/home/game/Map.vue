@@ -2,7 +2,7 @@
     <div class="map" ref="map">
         <div class="map-container">
             <div class="map-line" v-for="line in map_tiles" :key="line.coord_y">
-                <div class="map-tile" v-for="t in line.tiles" :key="t" :style="styleTile(t)" :class="t.classes">
+                <div class="map-tile" v-for="t in line.tiles" :key="t" :style="styleTile(t)" :class="t.classes" v-tippy="t.coord_x+'/'+t.coord_y">
                     <component v-if="t?.building?.type in tiles_types" :is="tiles_types[ t.building.type ]" />
 
                     <template v-else>
@@ -19,10 +19,12 @@
 </template>
 
 <script>
+import TileHorizontalRoad from './map/TileHorizontalRoad.vue'
+import TileIntersectionRoadBottom from './map/TileIntersectionRoadBottom.vue'
 import TileVerticalRoad from './map/TileVerticalRoad.vue'
 
 export default {
-    components: { TileVerticalRoad },
+    components: { TileHorizontalRoad, TileIntersectionRoadBottom, TileVerticalRoad },
 
     data: function () {
         return {
@@ -34,6 +36,8 @@ export default {
             map_tiles: [],
 
             tiles_types: {
+                horizontal_road: 'tile-horizontal-road',
+                intersection_road_bottom: 'tile-intersection-road-bottom',
                 vertical_road: 'tile-vertical-road',
             },
         }

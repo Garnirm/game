@@ -16,6 +16,17 @@ return [
         ],
     ],
 
+    'start_roads' => [
+        [ 'x' => 0, 'y' => -1, 'type' => 'horizontal_road', 'name' => 'Route' ],
+
+        [ 'x' => -1, 'y' => -1, 'type' => 'intersection_road_bottom', 'name' => 'Intersection' ],
+        [ 'x' => -1, 'y' => 0, 'type' => 'vertical_road', 'name' => 'Route' ],
+
+        [ 'x' => -2, 'y' => -1, 'type' => 'horizontal_road', 'name' => 'Route' ],
+
+        [ 'x' => -3, 'y' => -1, 'type' => 'horizontal_road', 'name' => 'Route' ],
+    ],
+
     'start_resources' => [
         'concrete' => [
             'easy' => 4000000,
@@ -91,6 +102,38 @@ return [
             ],
         ],
 
+        'horizontal_road' => [
+            'base_floor' => 0,
+            'base_jobs' => [],
+            'base_production' => [],
+
+            'base_upkeep' => [
+                'money' => 80,
+                'concrete' => 4,
+            ],
+
+            'base_cost' => [
+                'money' => 500,
+                'concrete' => 200,
+            ],
+        ],
+
+        'intersection_road_bottom' => [
+            'base_floor' => 0,
+            'base_jobs' => [],
+            'base_production' => [],
+
+            'base_upkeep' => [
+                'money' => 110,
+                'concrete' => 7,
+            ],
+
+            'base_cost' => [
+                'money' => 700,
+                'concrete' => 250,
+            ],
+        ],
+
         'vertical_road' => [
             'base_floor' => 0,
             'base_jobs' => [],
@@ -98,12 +141,13 @@ return [
 
             'base_upkeep' => [
                 'money' => 80,
+                'concrete' => 4,
             ],
 
             'base_cost' => [
                 'money' => 500,
                 'concrete' => 200,
             ],
-        ]
+        ],
     ],
 ];
