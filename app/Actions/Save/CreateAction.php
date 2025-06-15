@@ -30,6 +30,7 @@ class CreateAction
             'food' => config('game_design.start_resources.food.'.$save->difficulty),
             'money' => config('game_design.start_resources.money.'.$save->difficulty),
             'steel' => config('game_design.start_resources.steel.'.$save->difficulty),
+            'wood' => config('game_design.start_resources.wood.'.$save->difficulty),
             'influence' => 10,
         ];
 
@@ -54,6 +55,7 @@ class CreateAction
             jobs: config('game_design.buildings.city_hall.base_jobs'),
             upkeep: config('game_design.buildings.city_hall.base_upkeep'),
             production: config('game_design.buildings.city_hall.base_production'),
+            cost: config('game_design.buildings.city_hall.base_cost'),
             tiles: [ $tile_0_0 ],
         );
 
@@ -63,6 +65,7 @@ class CreateAction
             jobs: config('game_design.buildings.vertical_road.base_jobs'),
             upkeep: config('game_design.buildings.vertical_road.base_upkeep'),
             production: config('game_design.buildings.vertical_road.base_production'),
+            cost: config('game_design.buildings.vertical_road.base_cost'),
             tiles: [ $tile_neg1_0 ],
         );
 
@@ -73,6 +76,7 @@ class CreateAction
             upkeep: config('game_design.buildings.apartments.base_upkeep'),
             production: config('game_design.buildings.apartments.base_production'),
             housing: config('game_design.buildings.apartments.base_housing'),
+            cost: config('game_design.buildings.apartments.base_cost'),
             tiles: [ $tile_neg2_0, $tile_neg3_0 ],
         );
 

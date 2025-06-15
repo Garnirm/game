@@ -1,69 +1,54 @@
 // State
-var unlockable_tiles = null
-
-var concrete = null
-var food = null
-var money = null
-var influence = null
-var steel = null
-
-var production_concrete = null
-var production_food = null
-var production_money = null
-var production_influence = null
-var production_steel = null
-
-var production_balance_concrete = null
-var production_balance_food = null
-var production_balance_money = null
-var production_balance_influence = null
-var production_balance_steel = null
-
-var upkeep_concrete = null
-var upkeep_food = null
-var upkeep_money = null
-var upkeep_influence = null
-var upkeep_steel = null
+var resources = {}
+var productions = {}
+var production_balance = {}
+var upkeep = {}
 
 // Getters
 function get_resource (state) {
     return (resource) => {
-        return state[ resource ]
+        return state.resources[ resource ] ?? null
     }
 }
 
 function get_production (state) {
     return (resource) => {
-        return state[ 'production_'+resource ]
+        return state.productions[ resource ] ?? null
     }
 }
 
 function get_production_balance (state) {
     return (resource) => {
-        return state[ 'production_balance_'+resource ]
+        return state.production_balance[ resource ] ?? null
     }
 }
 
 function get_upkeep (state) {
     return (resource) => {
-        return state[ 'upkeep_'+resource ]
+        return state.upkeep[ resource ] ?? null
     }
 }
 
 // Mutations
 function set_resource (state, data) {
-    state[ data.resource ] = data.amount
+    state.resources[ data.resource ] = data.amount
+}
+
+function set_production (state, data) {
+    state.productions[ data.resource ] = data.amount
+}
+
+function set_production_balance (state, data) {
+    state.production_balance[ data.resource ] = data.amount
+}
+
+function set_upkeep (state, data) {
+    state.upkeep[ data.resource ] = data.amount
 }
 
 // Export
 export const stateResources = {
-    food, money, influence, steel, unlockable_tiles, concrete,
-
-    upkeep_food, upkeep_money, upkeep_influence, upkeep_steel, upkeep_concrete,
-
-    production_food, production_money, production_influence, production_steel, production_concrete,
-
-    production_balance_food, production_balance_money, production_balance_influence, production_balance_steel, production_balance_concrete,
+    resources, productions, production_balance, upkeep,
 }
 
 export const gettersResources = {
@@ -71,5 +56,5 @@ export const gettersResources = {
 }
 
 export const mutationsResources = {
-    set_resource,
+    set_resource, set_production, set_production_balance, set_upkeep,
 }

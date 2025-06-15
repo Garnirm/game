@@ -47,6 +47,7 @@ export default {
                 { label: 'Nourriture', var_amount: 'food', var_balance: 'production_balance_food' },
                 { label: 'Acier', var_amount: 'steel', var_balance: 'production_balance_steel' },
                 { label: 'Béton', var_amount: 'concrete', var_balance: 'production_balance_concrete' },
+                { label: 'Bois', var_amount: 'wood', var_balance: 'production_balance_wood' },
             ],
         }
     },
@@ -59,24 +60,14 @@ export default {
         influence: function () { return this.$store.getters['resources/get_resource']('influence') },
         money: function () { return this.$store.getters['resources/get_resource']('money') },
         steel: function () { return this.$store.getters['resources/get_resource']('steel') },
-
-        production_concrete: function () { return this.$store.getters['resources/get_production']('concrete') },
-        production_food: function () { return this.$store.getters['resources/get_production']('food') },
-        production_influence: function () { return this.$store.getters['resources/get_production']('influence') },
-        production_money: function () { return this.$store.getters['resources/get_production']('money') },
-        production_steel: function () { return this.$store.getters['resources/get_production']('steel') },
+        wood: function () { return this.$store.getters['resources/get_resource']('wood') },
 
         production_balance_concrete: function () { return this.$store.getters['resources/get_production_balance']('concrete') },
         production_balance_food: function () { return this.$store.getters['resources/get_production_balance']('food') },
         production_balance_influence: function () { return this.$store.getters['resources/get_production_balance']('influence') },
         production_balance_money: function () { return this.$store.getters['resources/get_production_balance']('money') },
         production_balance_steel: function () { return this.$store.getters['resources/get_production_balance']('steel') },
-
-        upkeep_concrete: function () { return this.$store.getters['resources/get_upkeep']('concrete') },
-        upkeep_food: function () { return this.$store.getters['resources/get_upkeep']('food') },
-        upkeep_influence: function () { return this.$store.getters['resources/get_upkeep']('influence') },
-        upkeep_money: function () { return this.$store.getters['resources/get_upkeep']('money') },
-        upkeep_steel: function () { return this.$store.getters['resources/get_upkeep']('steel') },
+        production_balance_wood: function () { return this.$store.getters['resources/get_production_balance']('wood') },
     },
 }
 </script>

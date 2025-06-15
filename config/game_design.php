@@ -37,6 +37,11 @@ return [
             'normal' => 250000,
             'hard' => 100000,
         ],
+        'wood' => [
+            'easy' => 50000,
+            'normal' => 25000,
+            'hard' => 10000,
+        ],
     ],
 
     'unlockable_tiles' => [
@@ -56,6 +61,12 @@ return [
             'base_upkeep' => [
                 'money' => 100,
             ],
+
+            'base_cost' => [
+                'money' => 15000,
+                'wood' => 500,
+                'concrete' => 2000,
+            ],
         ],
 
         'city_hall' => [
@@ -72,6 +83,12 @@ return [
             'base_production' => [
                 'influence' => 10,
             ],
+
+            'base_cost' => [
+                'money' => 35000,
+                'wood' => 1500,
+                'concrete' => 15000,
+            ],
         ],
 
         'vertical_road' => [
@@ -81,6 +98,11 @@ return [
 
             'base_upkeep' => [
                 'money' => 80,
+            ],
+
+            'base_cost' => [
+                'money' => 500,
+                'concrete' => 200,
             ],
         ]
     ],

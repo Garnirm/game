@@ -12,7 +12,7 @@ class BuildingManager
 {
     public function create(
         Save $save, City $city, array $tiles, string $name, string $type, int $floor, array $jobs = [], array $upkeep = [], array $production = [],
-        ?int $housing = null,
+        ?int $housing = null, array $cost = [],
     ): Building
     {
         $tiles_collection = new Collection($tiles);
@@ -28,10 +28,21 @@ class BuildingManager
         $building->name = $name;
         $building->type = $type;
         $building->floor = $floor;
-        $building->jobs = $jobs;
-        $building->upkeep = $upkeep;
-        $building->production = $production;
-        $building->housing = $housing;
+
+        $building->jobs = (new Collection($jobs))->mapWithKeys(function ($amount, $job) use ($coordinates) {
+            return [ $job => $amount * count($coordinates) ];
+        })->toArray();
+
+        $building->upkeep = (new Collection($upkeep))->mapWithKeys(function ($amount, $resource) use ($coordinates) {
+            return [ $resource => $amount * count($coordinates) ];
+        })->toArray();
+
+        $building->production = (new Collection($production))->mapWithKeys(function ($amount, $resource) use ($coordinates) {
+            return [ $resource => $amount * count($coordinates) ];
+        })->toArray();
+
+        $building->cost = $cost;
+        $building->housing = $housing * count($coordinates);
         $building->coordinates = $coordinates->toArray();
         $building->save();
 
