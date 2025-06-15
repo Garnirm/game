@@ -11,8 +11,8 @@ use Illuminate\Support\Collection;
 class BuildingManager
 {
     public function create(
-        Save $save, City $city, array $tiles, string $name, string $type, int $floor, array $jobs = [], array $upkeep = [], array $production = [],
-        ?int $housing = null, array $cost = [],
+        Save $save, City $city, iterable $tiles, string $name, string $type, int $floor, array $jobs = [], array $upkeep = [], array $production = [],
+        ?int $housing = null, array $cost = [], array $housing_repartition = [],
     ): Building
     {
         $tiles_collection = new Collection($tiles);
@@ -44,6 +44,7 @@ class BuildingManager
         $building->cost = $cost;
         $building->housing = $housing * count($coordinates);
         $building->coordinates = $coordinates->toArray();
+        $building->housing_repartition = $housing_repartition;
         $building->save();
 
         app(UpdateSave::class)->handle($save, $building);
