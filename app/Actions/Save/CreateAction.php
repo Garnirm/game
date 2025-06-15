@@ -43,6 +43,7 @@ class CreateAction
         $tile_0_0 = TileFacade::create(save: $save, city: $city, coord_x: 0, coord_y: 0, type: 'building', biome: 'plains');
         $tile_neg1_0 = TileFacade::create(save: $save, city: $city, coord_x: -1, coord_y: 0, type: 'building', biome: 'plains');
         $tile_neg2_0 = TileFacade::create(save: $save, city: $city, coord_x: -2, coord_y: 0, type: 'building', biome: 'plains');
+        $tile_neg3_0 = TileFacade::create(save: $save, city: $city, coord_x: -3, coord_y: 0, type: 'building', biome: 'plains');
 
         $save->position_view_tile_id = $tile_0_0->id;
         $save->save();
@@ -63,7 +64,7 @@ class CreateAction
             production: config('game_design.buildings.vertical_road.base_production'),
         );
 
-        BuildingFacade::create(
+        $apartments_1 = BuildingFacade::create(
             save: $save, city: $city, tile: $tile_neg2_0, name: 'Immeuble', type: 'apartments',
             floor: config('game_design.buildings.apartments.base_floor'),
             jobs: config('game_design.buildings.apartments.base_jobs'),
@@ -71,6 +72,19 @@ class CreateAction
             production: config('game_design.buildings.apartments.base_production'),
             housing: config('game_design.buildings.apartments.base_housing'),
         );
+
+        $apartments_2 = BuildingFacade::create(
+            save: $save, city: $city, tile: $tile_neg3_0, name: 'Immeuble', type: 'apartments',
+            floor: config('game_design.buildings.apartments.base_floor'),
+            jobs: config('game_design.buildings.apartments.base_jobs'),
+            upkeep: config('game_design.buildings.apartments.base_upkeep'),
+            production: config('game_design.buildings.apartments.base_production'),
+            housing: config('game_design.buildings.apartments.base_housing'),
+        );
+
+        BuildingFacade::linkBuildings(buildings: [
+            $apartments_1, $apartments_2,
+        ]);
 
         return [
             'success' => true,

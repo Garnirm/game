@@ -6,6 +6,7 @@ use App\Models\Building;
 use App\Models\City;
 use App\Models\Save;
 use App\Models\Tile;
+use App\Services\BuildingManager\UpdateSave;
 
 class BuildingManager
 {
@@ -29,39 +30,26 @@ class BuildingManager
         $building->coord_y = $tile->coord_y;
         $building->save();
 
-        $save_jobs = $save->jobs ?? [];
-        $save_production = $save->production ?? [];
-        $save_upkeep = $save->upkeep ?? [];
-
-        foreach ($building->jobs as $job => $amount) {
-            if (!isset($save_jobs[ $job ])) {
-                $save_jobs[ $job ] = 0;
-            }
-
-            $save_jobs[ $job ] += $amount;
-        }
-
-        foreach ($building->production as $production => $amount) {
-            if (!isset($save_production[ $production ])) {
-                $save_production[ $production ] = 0;
-            }
-
-            $save_production[ $production ] += $amount;
-        }
-
-        foreach ($building->upkeep as $upkeep => $amount) {
-            if (!isset($save_upkeep[ $upkeep ])) {
-                $save_upkeep[ $upkeep ] = 0;
-            }
-
-            $save_upkeep[ $upkeep ] += $amount;
-        }
-
-        $save->jobs = $save_jobs;
-        $save->production = $save_production;
-        $save->upkeep = $save_upkeep = $save_upkeep;
-        $save->save();
+        app(UpdateSave::class)->handle($save, $building);
 
         return $building;
+    }
+
+    public function linkBuildings(array $buildings): void
+    {
+        foreach ($buildings as $building) {
+            $linked_to = [];
+
+            foreach ($buildings as $iter_building) {
+                if ($iter_building->id === $building->id) {
+                    continue;
+                }
+
+                $linked_to[] = $iter_building->id;
+            }
+
+            $building->linked_to = $linked_to;
+            $building->save();
+        }
     }
 }

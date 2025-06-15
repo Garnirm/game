@@ -1,6 +1,21 @@
 <?php
 
 return [
+    'population_classes' => [
+        'worker' => [
+            'housing_consumption' => 1,
+        ],
+        'specialist' => [
+            'housing_consumption' => 2,
+        ],
+        'engineer' => [
+            'housing_consumption' => 3,
+        ],
+        'elite' => [
+            'housing_consumption' => 4,
+        ],
+    ],
+
     'start_resources' => [
         'concrete' => [
             'easy' => 4000000,
