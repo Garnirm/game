@@ -2,12 +2,22 @@
 
 return [
     'start_resources' => [
+        'concrete' => [
+            'easy' => 4000000,
+            'normal' => 3000000,
+            'hard' => 2000000,
+        ],
+        'food' => [
+            'easy' => 300000,
+            'normal' => 200000,
+            'hard' => 100000,
+        ],
         'money' => [
             'easy' => 5000000,
             'normal' => 2000000,
             'hard' => 1000000,
         ],
-        'wood' => [
+        'steel' => [
             'easy' => 500000,
             'normal' => 250000,
             'hard' => 100000,
@@ -21,6 +31,18 @@ return [
     ],
 
     'buildings' => [
+        'apartments' => [
+            'base_floor' => 3,
+            'base_housing' => 25,
+
+            'base_jobs' => [],
+            'base_production' => [],
+
+            'base_upkeep' => [
+                'money' => 100,
+            ],
+        ],
+
         'city_hall' => [
             'base_floor' => 2,
 

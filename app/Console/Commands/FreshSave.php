@@ -8,6 +8,7 @@ use App\Models\City;
 use App\Models\Save;
 use App\Models\Tile;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\File;
 
 class FreshSave extends Command
 {
@@ -31,6 +32,14 @@ class FreshSave extends Command
         ]);
 
         $this->info('Save ID : '.$action['data']);
+
+        $game_js = File::get(resource_path().'/js/store/game.js');
+
+        preg_match('/var save_id = \'(.*)\'/', $game_js, $match_save_id);
+
+        $game_js = str_replace($match_save_id[0], 'var save_id = \''.$action['data'].'\'', $game_js);
+
+        File::put(resource_path().'/js/store/game.js', $game_js);
 
         return Command::SUCCESS;
     }

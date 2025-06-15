@@ -6,7 +6,6 @@ use App\Facades\Building as BuildingFacade;
 use App\Facades\Tile as TileFacade;
 use App\Models\City;
 use App\Models\Save;
-use App\Models\Tile;
 
 class CreateAction
 {
@@ -27,9 +26,11 @@ class CreateAction
         $save->nb_unlockable_tiles = config('game_design.unlockable_tiles.'.$save->territory_growth);
 
         $save->resources = [
+            'concrete' => config('game_design.start_resources.concrete.'.$save->difficulty),
+            'food' => config('game_design.start_resources.food.'.$save->difficulty),
             'money' => config('game_design.start_resources.money.'.$save->difficulty),
+            'steel' => config('game_design.start_resources.steel.'.$save->difficulty),
             'influence' => 10,
-            'wood' => config('game_design.start_resources.wood.'.$save->difficulty)
         ];
 
         $save->save();
@@ -41,6 +42,7 @@ class CreateAction
 
         $tile_0_0 = TileFacade::create(save: $save, city: $city, coord_x: 0, coord_y: 0, type: 'building', biome: 'plains');
         $tile_neg1_0 = TileFacade::create(save: $save, city: $city, coord_x: -1, coord_y: 0, type: 'building', biome: 'plains');
+        $tile_neg2_0 = TileFacade::create(save: $save, city: $city, coord_x: -2, coord_y: 0, type: 'building', biome: 'plains');
 
         $save->position_view_tile_id = $tile_0_0->id;
         $save->save();
@@ -59,6 +61,15 @@ class CreateAction
             jobs: config('game_design.buildings.vertical_road.base_jobs'),
             upkeep: config('game_design.buildings.vertical_road.base_upkeep'),
             production: config('game_design.buildings.vertical_road.base_production'),
+        );
+
+        BuildingFacade::create(
+            save: $save, city: $city, tile: $tile_neg2_0, name: 'Immeuble', type: 'apartments',
+            floor: config('game_design.buildings.apartments.base_floor'),
+            jobs: config('game_design.buildings.apartments.base_jobs'),
+            upkeep: config('game_design.buildings.apartments.base_upkeep'),
+            production: config('game_design.buildings.apartments.base_production'),
+            housing: config('game_design.buildings.apartments.base_housing'),
         );
 
         return [

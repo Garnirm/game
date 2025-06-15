@@ -9,7 +9,10 @@ use App\Models\Tile;
 
 class BuildingManager
 {
-    public function create(Save $save, City $city, Tile $tile, string $name, string $type, int $floor, array $jobs = [], array $upkeep = [], array $production = []): Building
+    public function create(
+        Save $save, City $city, Tile $tile, string $name, string $type, int $floor, array $jobs = [], array $upkeep = [], array $production = [],
+        ?int $housing = null,
+    ): Building
     {
         $building = new Building();
         $building->save_id = $save->id;
@@ -21,6 +24,7 @@ class BuildingManager
         $building->jobs = $jobs;
         $building->upkeep = $upkeep;
         $building->production = $production;
+        $building->housing = $housing;
         $building->coord_x = $tile->coord_x;
         $building->coord_y = $tile->coord_y;
         $building->save();

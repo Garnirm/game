@@ -38,8 +38,22 @@ export default {
 
                     this.$store.commit('map/set_coord_position_view', coord_position_view)
 
+                    this.$store.commit('resources/set_resource', { resource: 'unlockable_tiles', amount: data.nb_unlockable_tiles })
+
                     for (let r in data.resources) {
                         this.$store.commit('resources/set_resource', { resource: r, amount: data.resources[r] })
+                    }
+
+                    for (let u in data.upkeep) {
+                        this.$store.commit('resources/set_resource', { resource: 'upkeep_'+u, amount: data.upkeep[u] })
+                    }
+
+                    for (let p in data.production) {
+                        this.$store.commit('resources/set_resource', { resource: 'production_'+p, amount: data.production[p] })
+                    }
+
+                    for (let pb in data.production_balance) {
+                        this.$store.commit('resources/set_resource', { resource: 'production_balance_'+pb, amount: data.production_balance[pb] })
                     }
                 })
                 .catch((e) => {})
