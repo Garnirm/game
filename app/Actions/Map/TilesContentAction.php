@@ -33,38 +33,57 @@ class TilesContentAction
             ])
             ->toBase()
             ->get()
-            ->each(function ($building) use ($coordinates_buildings, $x_max, $x_start, $y_max, $y_start) {
+            ->each(function ($building) use ($coordinates_buildings) {
                 $building->id = (string) $building->id;
 
                 $size_coordinates = count($building->coordinates);
 
                 if ($size_coordinates === 1) {
                     $building->display_label_coord = $building->coordinates[0];
-                    $building->dimensions_box_label = [ 'width' => 80, 'height' => 80 ];
                 } else {
-                    $coordinates = (new Collection($building->coordinates))
-                        ->filter(function ($coordinate) use ($x_max, $x_start, $y_max, $y_start) {
-                            return $coordinate['x'] >= $x_start &&
-                                $coordinate['x'] <= $x_max &&
-                                $coordinate['y'] >= $y_start &&
-                                $coordinate['y'] <= $y_max;
-                        })
-                        ->values();
+                    $more_large_width = [ 'y' => null, 'x_min' => 0, 'x_max' => 0, 'size' => 0 ];
 
-                    $all_x = $coordinates->pluck('x')->unique()->values();
-                    $all_y = $coordinates->pluck('y')->unique()->values();
+                    $coordinates_y = (new Collection($building->coordinates))->groupBy('y');
 
-                    $max_x = $all_x->max();
-                    $min_x = $all_x->min();
+                    foreach ($coordinates_y as $y => $coordinates) {
+                        $max_x = null;
+                        $min_x = null;
 
-                    $max_y = $all_y->max();
-                    $min_y = $all_y->min();
+                        foreach ($coordinates as $c) {
+                            if (is_null($min_x) || $c['x'] < $min_x) {
+                                $min_x = $c['x'];
+                            }
 
-                    $x_tiles_box = ($max_x - $min_x) + 1;
-                    $y_tiles_box = ($max_y - $min_y) + 1;
+                            if (is_null($max_x) || $c['x'] > $max_x) {
+                                $max_x = $c['x'];
+                            }
+                        }
 
-                    $box_width = $x_tiles_box * 80;
-                    $box_height = $y_tiles_box * 80;
+                        if ($min_x > $max_x) {
+                            $size_x = ($min_x - $max_x) + 1;
+                        } else {
+                            $size_x = ($max_x - $min_x) + 1;
+                        }
+
+                        if ($size_x > $more_large_width['size']) {
+                            $more_large_width['y'] = $y;
+                            $more_large_width['x_min'] = $min_x;
+                            $more_large_width['x_max'] = $max_x;
+                            $more_large_width['size'] = $size_x;
+                        }
+
+                        if ($more_large_width['size'] === 2) {
+                            $building->display_label_coord = [ 'y' => $more_large_width['y'], 'x' => $more_large_width['x_min'] ];
+                        } else {
+                            $half_x = $more_large_width['size'] / 2;
+
+                            if (strpos($half_x, '.') !== false) {
+                                $half_x = (int) floor($half_x);
+                            }
+
+                            $building->display_label_coord = [ 'y' => $more_large_width['y'], 'x' => $more_large_width['x_min'] + $half_x ];
+                        }
+                    }
                 }
 
                 foreach ($building->coordinates as $coordinates) {

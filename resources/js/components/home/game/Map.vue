@@ -8,7 +8,7 @@
                     <template v-else>
                         <div v-if="t?.unlockable" class="tile-unlockable"></div>
 
-                        <div class="tile-building" v-if="t.building">
+                        <div class="tile-building" v-if="t.building && displayCoordLabel(t.building, t.coord_x, t.coord_y)">
                             {{ t.building.name }}
                         </div>
                     </template>
@@ -149,6 +149,10 @@ export default {
 
                     this.map_tiles = map_tiles
                 })
+        },
+
+        displayCoordLabel: function (building, tile_x, tile_y) {
+            return building.display_label_coord.x === tile_x && building.display_label_coord.y === tile_y
         },
 
         styleTile: function () {
