@@ -2,13 +2,15 @@
     <div class="map" ref="map">
         <div class="map-container">
             <div class="map-line" v-for="line in map_tiles" :key="line.coord_y">
-                <div class="map-tile" v-for="t in line.tiles" :key="t" :style="styleTile(t)">
+                <div class="map-tile" v-for="t in line.tiles" :key="t" :style="styleTile(t)" :class="t.classes">
                     <component v-if="t?.building?.type in tiles_types" :is="tiles_types[ t.building.type ]" />
 
                     <template v-else>
                         <div v-if="t?.unlockable" class="tile-unlockable"></div>
 
-                        <div class="tile-building" v-if="t.building">{{ t.building.name }}</div>
+                        <div class="tile-building" v-if="t.building">
+                            {{ t.building.name }}
+                        </div>
                     </template>
                 </div>
             </div>
@@ -110,6 +112,7 @@ export default {
                 .then((res) => {
                     let data = res.data.data
 
+                    let buildings = data.buildings
                     let tiles = data.tiles
 
                     let map_tiles = []
@@ -119,8 +122,26 @@ export default {
 
                         for (let tile_x = x_start; tile_x <= x_max; tile_x++) {
                             let key_tile = tile_x+'/'+tile_y
+                            let tile = tiles[ key_tile ]
 
-                            tiles_line.push(tiles[ key_tile ])
+                            let classes = []
+
+                            if (tile.building && tile.building.coordinates.length > 1) {
+                                let left_neighbor_tile = (tile_x - 1)+'/'+tile_y
+                                let top_neighbor_tile = tile_x+'/'+(tile_y - 1)
+
+                                if (left_neighbor_tile in buildings && buildings[ left_neighbor_tile ].id === tile.building.id) {
+                                    classes.push('no-left-border');
+                                }
+
+                                if (top_neighbor_tile in buildings && buildings[ top_neighbor_tile ].id === tile.building.id) {
+                                    classes.push('no-top-border');
+                                }
+                            }
+
+                            tile.classes = classes
+
+                            tiles_line.push(tile)
                         }
 
                         map_tiles.push({ coord_y: tile_y, tiles: tiles_line })
@@ -130,7 +151,7 @@ export default {
                 })
         },
 
-        styleTile: function (tile) {
+        styleTile: function () {
             return {
                 'border-bottom': '1px solid black',
                 'border-left': '1px solid black',
@@ -169,10 +190,19 @@ export default {
                     border-right: unset !important;
                 }
 
+                &.no-left-border {
+                    border-left: unset !important;
+                }
+
+                &.no-top-border {
+                    border-top: unset !important;
+                }
+
                 .tile-building {
                     font-size: 13px;
-                    margin-left: 8px;
-                    margin-top: 8px;
+                    left: 8px;
+                    position: absolute;
+                    top: 8px;
                 }
 
                 .tile-unlockable {

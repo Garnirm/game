@@ -5,6 +5,7 @@ namespace App\Actions\Map;
 use App\Models\Building;
 use App\Models\Save;
 use App\Models\Tile;
+use Illuminate\Support\Collection;
 
 class TilesContentAction
 {
@@ -22,18 +23,53 @@ class TilesContentAction
         $y_max = $params['y_max'];
         $y_start = $params['y_start'];
 
-        $buildings = Building::query()
+        $coordinates_buildings = new Collection();
+
+        Building::query()
             ->where('save_id', $save->id)
-            ->where('coord_x', '>=', $x_start)
-            ->where('coord_x', '<=', $x_max)
-            ->where('coord_y', '>=', $y_start)
-            ->where('coord_y', '<=', $y_max)
+            ->where('coordinates', 'elemMatch', [
+                'x' => [ '$gte' => $x_start, '$lte' => $x_max ],
+                'y' => [ '$gte' => $y_start, '$lte' => $y_max ],
+            ])
             ->toBase()
             ->get()
-            ->mapWithKeys(function ($building) {
-                $key = $building->coord_x.'/'.$building->coord_y;
+            ->each(function ($building) use ($coordinates_buildings, $x_max, $x_start, $y_max, $y_start) {
+                $building->id = (string) $building->id;
 
-                return [ $key => $building ];
+                $size_coordinates = count($building->coordinates);
+
+                if ($size_coordinates === 1) {
+                    $building->display_label_coord = $building->coordinates[0];
+                    $building->dimensions_box_label = [ 'width' => 80, 'height' => 80 ];
+                } else {
+                    $coordinates = (new Collection($building->coordinates))
+                        ->filter(function ($coordinate) use ($x_max, $x_start, $y_max, $y_start) {
+                            return $coordinate['x'] >= $x_start &&
+                                $coordinate['x'] <= $x_max &&
+                                $coordinate['y'] >= $y_start &&
+                                $coordinate['y'] <= $y_max;
+                        })
+                        ->values();
+
+                    $all_x = $coordinates->pluck('x')->unique()->values();
+                    $all_y = $coordinates->pluck('y')->unique()->values();
+
+                    $max_x = $all_x->max();
+                    $min_x = $all_x->min();
+
+                    $max_y = $all_y->max();
+                    $min_y = $all_y->min();
+
+                    $x_tiles_box = ($max_x - $min_x) + 1;
+                    $y_tiles_box = ($max_y - $min_y) + 1;
+
+                    $box_width = $x_tiles_box * 80;
+                    $box_height = $y_tiles_box * 80;
+                }
+
+                foreach ($building->coordinates as $coordinates) {
+                    $coordinates_buildings->put($coordinates['x'].'/'.$coordinates['y'], $building);
+                }
             });
 
         $tile_query_x_max = $x_max + 1;
@@ -49,10 +85,10 @@ class TilesContentAction
             ->where('coord_y', '<=', $tile_query_y_max)
             ->toBase()
             ->get()
-            ->mapWithKeys(function ($tile) use ($buildings) {
+            ->mapWithKeys(function ($tile) use ($coordinates_buildings) {
                 $key = $tile->coord_x.'/'.$tile->coord_y;
 
-                $tile->building = $buildings->get($key);
+                $tile->building = $coordinates_buildings->get($key);
 
                 return [ $key => $tile ];
             });
@@ -83,6 +119,7 @@ class TilesContentAction
         return [
             'success' => true,
             'data' => [
+                'buildings' => $coordinates_buildings,
                 'tiles' => $map_tiles,
             ],
         ];

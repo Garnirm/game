@@ -49,42 +49,32 @@ class CreateAction
         $save->save();
 
         BuildingFacade::create(
-            save: $save, city: $city, tile: $tile_0_0, name: 'Hôtel de ville', type: 'city_hall',
+            save: $save, city: $city, name: 'Hôtel de ville', type: 'city_hall',
             floor: config('game_design.buildings.city_hall.base_floor'),
             jobs: config('game_design.buildings.city_hall.base_jobs'),
             upkeep: config('game_design.buildings.city_hall.base_upkeep'),
             production: config('game_design.buildings.city_hall.base_production'),
+            tiles: [ $tile_0_0 ],
         );
 
         BuildingFacade::create(
-            save: $save, city: $city, tile: $tile_neg1_0, name: 'Route', type: 'vertical_road',
+            save: $save, city: $city, name: 'Route', type: 'vertical_road',
             floor: config('game_design.buildings.vertical_road.base_floor'),
             jobs: config('game_design.buildings.vertical_road.base_jobs'),
             upkeep: config('game_design.buildings.vertical_road.base_upkeep'),
             production: config('game_design.buildings.vertical_road.base_production'),
+            tiles: [ $tile_neg1_0 ],
         );
 
         $apartments_1 = BuildingFacade::create(
-            save: $save, city: $city, tile: $tile_neg2_0, name: 'Immeuble', type: 'apartments',
+            save: $save, city: $city, name: 'Immeuble', type: 'apartments',
             floor: config('game_design.buildings.apartments.base_floor'),
             jobs: config('game_design.buildings.apartments.base_jobs'),
             upkeep: config('game_design.buildings.apartments.base_upkeep'),
             production: config('game_design.buildings.apartments.base_production'),
             housing: config('game_design.buildings.apartments.base_housing'),
+            tiles: [ $tile_neg2_0, $tile_neg3_0 ],
         );
-
-        $apartments_2 = BuildingFacade::create(
-            save: $save, city: $city, tile: $tile_neg3_0, name: 'Immeuble', type: 'apartments',
-            floor: config('game_design.buildings.apartments.base_floor'),
-            jobs: config('game_design.buildings.apartments.base_jobs'),
-            upkeep: config('game_design.buildings.apartments.base_upkeep'),
-            production: config('game_design.buildings.apartments.base_production'),
-            housing: config('game_design.buildings.apartments.base_housing'),
-        );
-
-        BuildingFacade::linkBuildings(buildings: [
-            $apartments_1, $apartments_2,
-        ]);
 
         return [
             'success' => true,
