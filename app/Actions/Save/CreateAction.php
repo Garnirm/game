@@ -3,9 +3,12 @@
 namespace App\Actions\Save;
 
 use App\Facades\Building as BuildingFacade;
+use App\Facades\Pop as PopFacade;
 use App\Facades\Tile as TileFacade;
+use App\Models\Building;
 use App\Models\City;
 use App\Models\Save;
+use App\Services\TransformNegative;
 use Illuminate\Support\Collection;
 
 class CreateAction
@@ -25,16 +28,7 @@ class CreateAction
         $save->ia_trait_points = $params['ia_trait_points'];
         $save->tour = 1;
         $save->nb_unlockable_tiles = config('game_design.codex.unlockable_tiles.'.$save->territory_growth);
-
-        $save->resources = [
-            'concrete' => config('game_design.start.resources.concrete.'.$save->difficulty),
-            'food' => config('game_design.start.resources.food.'.$save->difficulty),
-            'money' => config('game_design.start.resources.money.'.$save->difficulty),
-            'steel' => config('game_design.start.resources.steel.'.$save->difficulty),
-            'wood' => config('game_design.start.resources.wood.'.$save->difficulty),
-            'influence' => 10,
-        ];
-
+        $save->resources = (new Collection(config('game_design.start.resources')))->map(fn ($resource) => $resource[ $save->difficulty ])->toArray();
         $save->save();
 
         $city = new City();
@@ -45,6 +39,7 @@ class CreateAction
         $tiles = [];
 
         $buildings = config('game_design.start.buildings');
+        $pops = config('game_design.start.pops');
         $roads = config('game_design.start.roads');
         $start_tiles = config('game_design.start.tiles');
 
@@ -82,6 +77,24 @@ class CreateAction
                 cost: config('game_design.buildings.'.$building['type'].'.base_cost'),
                 tiles: (new Collection($building['tiles']))->map(fn ($tile) => $tiles[ $tile ]),
             );
+        }
+
+        foreach ($pops as $coordinates => $pops_classes) {
+            [ $x, $y ] = explode('_', $coordinates);
+
+            $x = TransformNegative::castToRealNumber($x);
+            $y = TransformNegative::castToRealNumber($y);
+
+            $building = Building::query()->where('save_id', $save->id)
+                ->where('coordinates', 'elemMatch', [
+                    'x' => [ '$eq' => $x ],
+                    'y' => [ '$eq' => $y ],
+                ])
+                ->first();
+
+            foreach ($pops_classes as $class => $data_class) {
+                PopFacade::create(save: $save, building: $building, class: $class, amount: $data_class['amount'], jobs: $data_class['jobs']);
+            }
         }
 
         return [

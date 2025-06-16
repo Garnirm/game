@@ -32,6 +32,8 @@
 
         <div class="sidebar-block">
             <div class="block-label">Villes</div>
+
+            <div class="block-content block-cities"></div>
         </div>
     </div>
 </template>
@@ -44,6 +46,7 @@ export default {
 
             resources: [
                 { label: 'Monnaie', var_amount: 'money', var_balance: 'production_balance_money' },
+                { label: 'Influence', var_amount: 'influence', var_balance: 'production_balance_influence' },
                 { label: 'Nourriture', var_amount: 'food', var_balance: 'production_balance_food' },
                 { label: 'Acier', var_amount: 'steel', var_balance: 'production_balance_steel' },
                 { label: 'Béton', var_amount: 'concrete', var_balance: 'production_balance_concrete' },
@@ -85,6 +88,8 @@ export default {
 
         .block-content {
             margin-top: 8px;
+
+            &.block-cities {}
 
             &.block-resources {
                 .resources-line {

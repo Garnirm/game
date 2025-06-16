@@ -5,6 +5,8 @@ namespace App\Console\Commands;
 use App\Actions\Save\CreateAction;
 use App\Models\Building;
 use App\Models\City;
+use App\Models\Job;
+use App\Models\Pop;
 use App\Models\Save;
 use App\Models\Tile;
 use Illuminate\Console\Command;
@@ -20,8 +22,10 @@ class FreshSave extends Command
 
         if (!is_null($save)) {
             Building::where('save_id', $save->id)->forceDelete();
-            Tile::where('save_id', $save->id)->forceDelete();
             City::where('save_id', $save->id)->forceDelete();
+            Job::where('save_id', $save->id)->forceDelete();
+            Pop::where('save_id', $save->id)->forceDelete();
+            Tile::where('save_id', $save->id)->forceDelete();
             Save::where('id', $save->id)->forceDelete();
         }
 

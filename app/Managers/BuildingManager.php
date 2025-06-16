@@ -4,6 +4,7 @@ namespace App\Managers;
 
 use App\Models\Building;
 use App\Models\City;
+use App\Models\Job;
 use App\Models\Save;
 use App\Services\BuildingManager\UpdateSave;
 use Illuminate\Support\Collection;
@@ -11,7 +12,7 @@ use Illuminate\Support\Collection;
 class BuildingManager
 {
     public function create(
-        Save $save, City $city, iterable $tiles, string $name, string $type, int $floor, array $jobs = [], array $upkeep = [], array $production = [],
+        Save $save, ?City $city = null, iterable $tiles, string $name, string $type, int $floor, array $jobs = [], array $upkeep = [], array $production = [],
         ?int $housing = null, array $cost = [], array $housing_repartition = [],
     ): Building
     {
@@ -29,10 +30,6 @@ class BuildingManager
         $building->type = $type;
         $building->floor = $floor;
 
-        $building->jobs = (new Collection($jobs))->mapWithKeys(function ($amount, $job) use ($coordinates) {
-            return [ $job => $amount * count($coordinates) ];
-        })->toArray();
-
         $building->upkeep = (new Collection($upkeep))->mapWithKeys(function ($amount, $resource) use ($coordinates) {
             return [ $resource => $amount * count($coordinates) ];
         })->toArray();
@@ -48,6 +45,16 @@ class BuildingManager
         $building->save();
 
         app(UpdateSave::class)->handle($save, $building);
+
+        foreach ($jobs as $job => $amount) {
+            $job_model = new Job();
+            $job_model->save_id = $save->id;
+            $job_model->building_id = $building->id;
+            $job_model->type = $job;
+            $job_model->amount = $amount * count($coordinates);
+            $job_model->taken = 0;
+            $job_model->save();
+        }
 
         return $building;
     }

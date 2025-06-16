@@ -38,9 +38,5 @@ return [
         ],
     ],
 
-    'unlockable_tiles' => [
-        'slow' => 50,
-        'normal' => 100,
-        'fast' => 200,
-    ],
+    'unlockable_tiles' => [ 'slow' => 50, 'normal' => 100, 'fast' => 200 ],
 ];
