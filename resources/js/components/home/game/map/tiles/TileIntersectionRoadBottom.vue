@@ -1,12 +1,12 @@
 <template>
-    <sprite-road :height="height_tile" :width="width_tile" />
+    <sprite-one-intersection-road :height="height_tile" :width="width_tile" />
 </template>
 
 <script>
-import SpriteRoad from '../../../sprites/SpriteRoad.vue'
+import SpriteOneIntersectionRoad from '../../../../sprites/SpriteOneIntersectionRoad.vue'
 
 export default {
-    components: { SpriteRoad },
+    components: { SpriteOneIntersectionRoad },
 
     computed: {
         height_tile: function () { return this.$store.getters['map/get_height_tile'] },

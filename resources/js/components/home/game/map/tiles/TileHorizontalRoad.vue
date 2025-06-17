@@ -1,9 +1,9 @@
 <template>
-    <sprite-road :height="height_tile" :width="width_tile" :orientation="90" />
+    <sprite-road :height="height_tile" :width="width_tile" />
 </template>
 
 <script>
-import SpriteRoad from '../../../sprites/SpriteRoad.vue'
+import SpriteRoad from '../../../../sprites/SpriteRoad.vue'
 
 export default {
     components: { SpriteRoad },

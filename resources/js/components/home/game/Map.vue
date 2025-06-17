@@ -2,7 +2,7 @@
     <div class="map" ref="map">
         <div class="map-container">
             <div class="map-line" v-for="line in map_tiles" :key="line.coord_y">
-                <div class="map-tile" v-for="t in line.tiles" :key="t" :style="styleTile(t)" :class="t.classes" v-tippy="t.coord_x+'/'+t.coord_y">
+                <div class="map-tile" v-for="t in line.tiles" :key="t" :style="styleTile(t)" :class="t.classes" v-tippy="t.coord_x+'/'+t.coord_y" @click="clickTile(t)">
                     <component v-if="t?.building?.type in tiles_types" :is="tiles_types[ t.building.type ]" />
 
                     <template v-else>
@@ -16,15 +16,21 @@
             </div>
         </div>
     </div>
+
+    <modale-building-detail :save_id="save_id" />
 </template>
 
 <script>
-import TileHorizontalRoad from './map/TileHorizontalRoad.vue'
-import TileIntersectionRoadBottom from './map/TileIntersectionRoadBottom.vue'
-import TileVerticalRoad from './map/TileVerticalRoad.vue'
+import TileHorizontalRoad from './map/tiles/TileHorizontalRoad.vue'
+import TileIntersectionRoadBottom from './map/tiles/TileIntersectionRoadBottom.vue'
+import TileVerticalRoad from './map/tiles/TileVerticalRoad.vue'
+
+import ModaleBuildingDetail from './map/ModaleBuildingDetail.vue'
 
 export default {
-    components: { TileHorizontalRoad, TileIntersectionRoadBottom, TileVerticalRoad },
+    components: {
+        ModaleBuildingDetail, TileHorizontalRoad, TileIntersectionRoadBottom, TileVerticalRoad
+    },
 
     data: function () {
         return {
@@ -77,6 +83,12 @@ export default {
     },
 
     methods: {
+        clickTile: function (tile) {
+            if (tile.building) {
+                EventBus.emit('open_modale_building_details', { building_id: tile.building.id, coord_x: tile.coord_x, coord_y: tile.coord_y })
+            }
+        },
+
         generateMap: function (coordinates) {
             let [ x, y ] = coordinates.split('/')
 

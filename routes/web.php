@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BuildingController;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\SaveController;
 use Illuminate\Support\Facades\Route;
@@ -11,6 +12,10 @@ Route::get('check', function () {
 Route::view('', 'template');
 Route::view('create', 'template');
 Route::view('game', 'template');
+
+Route::prefix('building')->group(function () {
+    Route::post('details', [ BuildingController::class, 'details' ]);
+});
 
 Route::prefix('map')->group(function () {
     Route::post('tiles_content', [ MapController::class, 'tilesContent' ]);

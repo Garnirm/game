@@ -29,10 +29,12 @@ return [
     ],
 
     'jobs' => [
-        'administrative_jobs' => [
+        'administrative_job' => [
+            'label' => 'Emploi administratif',
             'pop_class' => 'specialist',
         ],
         'mayor' => [
+            'label' => 'Maire',
             'pop_class' => 'elite',
             'production' => [ 'influence' => 10 ],
         ],
