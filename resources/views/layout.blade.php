@@ -15,7 +15,7 @@
 
     <body style="height: 100vh;">
         <div id="app" style="height: 100%;">
-            <layout></layout>
+            <layout :housing_consumption="{{ $housing_consumption }}"></layout>
         </div>
     </body>
 </html>

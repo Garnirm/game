@@ -1,5 +1,7 @@
 // State
-var save_id = '6850814fbe4189981d041762'
+var save_id = '68533e1e99fa57b4b40689f2'
+
+var housing_consumption = {}
 
 var tour = null
 var save_name = null
@@ -22,6 +24,12 @@ function get_coord_position_view (state) {
     return state.coord_position_view
 }
 
+function get_housing_consumption (state) {
+    return (housing_class) => {
+        return state.housing_consumption[ housing_class ]
+    }
+}
+
 // Mutations
 function set_save_id (state, save_id) {
     state.save_id = save_id
@@ -39,15 +47,19 @@ function set_coord_position_view (state, coord_position_view) {
     state.coord_position_view = coord_position_view
 }
 
+function load_housing_consumption (state, housing_consumption) {
+    state.housing_consumption = housing_consumption
+}
+
 // Export
 export const stateGame = {
-    save_id, tour, save_name, coord_position_view,
+    save_id, tour, save_name, coord_position_view, housing_consumption,
 }
 
 export const gettersGame = {
-    get_save_id, get_tour, get_save_name, get_coord_position_view,
+    get_save_id, get_tour, get_save_name, get_coord_position_view, get_housing_consumption,
 }
 
 export const mutationsGame = {
-    set_save_id, set_tour, set_save_name, set_coord_position_view,
+    set_save_id, set_tour, set_save_name, set_coord_position_view, load_housing_consumption,
 }

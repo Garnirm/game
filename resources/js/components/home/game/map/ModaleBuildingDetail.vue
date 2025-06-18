@@ -2,7 +2,7 @@
     <div class="modal-wrapper" v-if="visible">
         <div class="modal" style="width: 800px;" v-click-outside="outside">
             <div class="modal-header">
-                <div class="modal-header-title">{{ building_name }} ( {{ building_coordinates }} )</div>
+                <div class="modal-header-title">{{ building.name }} ( {{ building_coordinates }} )</div>
 
                 <div class="modal-header-close" @click="outside">
                     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -12,7 +12,7 @@
             </div>
 
             <div class="modal-body">
-                <div class="block-jobs">
+                <div class="block-jobs" v-if="jobs.length > 0">
                     <div class="block-jobs-label">Emplois</div>
 
                     <div class="block-jobs-list">
@@ -21,6 +21,30 @@
 
                             <div>{{ j.taken }} emplois occupés / {{ j.amount }}</div>
                         </div>
+                    </div>
+                </div>
+
+                <div class="block-housing" v-if="building.housing > 0">
+                    <div class="block-housing-label">Répartition des logements (Capacité : {{ building.housing }})</div>
+
+                    <div class="block-housing-repartition">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Catégorie de pop</th>
+                                    <th>Nombre de pops</th>
+                                    <th>Logements occupés</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr v-for="(amount, housing_class) in building.housing_repartition" :key="housing_class">
+                                    <td>{{ housing_class }}</td>
+                                    <td>{{ amount }}</td>
+                                    <td>{{ amount * this['consumption_'+housing_class] }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -48,7 +72,7 @@ export default {
 
     data: function () {
         return {
-            building_name: null,
+            building: {},
             building_coordinates: null,
 
             jobs: [],
@@ -56,18 +80,27 @@ export default {
             visible: false,
         }
     },
+
+    computed: {
+        consumption_worker: function () { return this.$store.getters['game/get_housing_consumption']('worker') },
+        consumption_specialist: function () { return this.$store.getters['game/get_housing_consumption']('specialist') },
+        consumption_engineer: function () { return this.$store.getters['game/get_housing_consumption']('engineer') },
+        consumption_elite: function () { return this.$store.getters['game/get_housing_consumption']('elite') },
+    },
+
     created: function () {
         EventBus.on('open_modale_building_details', (data) => {
             this.getDetails(data)
         })
     },
+
     methods: {
         getDetails: function (data_event) {
             axios.post('/building/details', { save_id: this.save_id, building_id: data_event.building_id })
                 .then((res) => {
                     let data = res.data.data
 
-                    this.building_name = data.building.name
+                    this.building = data.building
                     this.building_coordinates = data_event.coord_x+' / '+data_event.coord_y
 
                     this.jobs = data.jobs
@@ -96,6 +129,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.block-housing {
+    .block-housing-label {
+        font-size: 18px;
+        margin-bottom: 16px;
+    }
+
+    .block-housing-repartition {
+        table {
+            width: 100%;
+        }
+    }
+}
+
 .block-jobs {
     .block-jobs-label {
         font-size: 18px;

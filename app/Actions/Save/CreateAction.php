@@ -76,6 +76,7 @@ class CreateAction
                 housing: config('game_design.buildings.'.$building['type'].'.base_housing'),
                 cost: config('game_design.buildings.'.$building['type'].'.base_cost'),
                 tiles: (new Collection($building['tiles']))->map(fn ($tile) => $tiles[ $tile ]),
+                housing_repartition: $building['housing_repartition'] ?? [],
             );
         }
 

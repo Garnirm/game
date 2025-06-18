@@ -12,7 +12,15 @@ return [
 
     'buildings' => [
         [ 'name' => 'Hôtel de ville', 'type' => 'city_hall', 'tiles' => [ '0_0' ] ],
-        [ 'name' => 'Immeuble', 'type' => 'apartments', 'id' => 'Immeuble 1', 'tiles' => [ 'neg2_0', 'neg3_0' ] ],
+        [
+            'name' => 'Immeuble', 'type' => 'apartments', 'id' => 'Immeuble 1', 'tiles' => [ 'neg2_0', 'neg3_0' ],
+            'housing_repartition' => [
+                'elite' => 1,
+                'engineer' => 1,
+                'specialist' => 5,
+                'worker' => 33,
+            ],
+        ],
     ],
 
     'pops' => [
@@ -31,7 +39,7 @@ return [
             ],
             'worker' => [
                 'amount' => 33,
-                'jobs' => []
+                'jobs' => [],
             ],
         ],
     ],
