@@ -4,6 +4,7 @@ return [
     'resources' => [
         'concrete' => [ 'easy' => 4000000, 'normal' => 3000000, 'hard' => 2000000 ],
         'food' => [ 'easy' => 300000, 'normal' => 200000, 'hard' => 100000 ],
+        'wheat' => [ 'easy' => 100000, 'normal' => 50000, 'hard' => 25000 ], // Blé
         'influence' => [ 'easy' => 100, 'normal' => 50, 'hard' => 20 ],
         'money' => [ 'easy' => 5000000, 'normal' => 2000000, 'hard' => 1000000 ],
         'steel' => [ 'easy' => 500000, 'normal' => 250000, 'hard' => 100000 ],
@@ -38,7 +39,7 @@ return [
                 ],
             ],
             'worker' => [
-                'amount' => 33,
+                'amount' => 25,
                 'jobs' => [],
             ],
         ],

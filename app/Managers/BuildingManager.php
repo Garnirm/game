@@ -5,6 +5,7 @@ namespace App\Managers;
 use App\Models\Building;
 use App\Models\City;
 use App\Models\Job;
+use App\Models\Player;
 use App\Models\Save;
 use App\Services\BuildingManager\UpdateSave;
 use Illuminate\Support\Collection;
@@ -12,7 +13,7 @@ use Illuminate\Support\Collection;
 class BuildingManager
 {
     public function create(
-        Save $save, ?City $city = null, iterable $tiles, string $name, string $type, int $floor, array $jobs = [], array $upkeep = [], array $production = [],
+        Save $save, Player $player, ?City $city = null, iterable $tiles, string $name, string $type, int $floor, array $jobs = [], array $upkeep = [], array $production = [],
         ?int $housing = null, array $cost = [], array $housing_repartition = [],
     ): Building
     {
@@ -24,6 +25,7 @@ class BuildingManager
 
         $building = new Building();
         $building->save_id = $save->id;
+        $building->player_id = $player->id;
         $building->city_id = $city->id;
         $building->tiles = $tiles_collection->pluck('id')->toArray();
         $building->name = $name;

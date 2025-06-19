@@ -2,6 +2,7 @@
 
 namespace App\Actions\Save;
 
+use App\Models\Player;
 use App\Models\Save;
 use App\Models\Tile;
 
@@ -31,14 +32,16 @@ class RetrieveAction
             $production_balance[ $resource ] -= $amount;
         }
 
+        $player = Player::where('save_id', $save->id)->where('is_ai', false)->first();
+
         return [
             'success' => true,
             'data' => [
                 'save_name' => $save->save_name,
                 'tour' => $save->tour,
-                'resources' => $save->resources,
+                'resources' => $player->resources,
                 'position_view_tile' => $position_view_tile,
-                'nb_unlockable_tiles' => $save->nb_unlockable_tiles,
+                'nb_unlockable_tiles' => $player->nb_unlockable_tiles,
                 'upkeep' => $save->upkeep,
                 'production' => $save->production,
                 'production_balance' => $production_balance,

@@ -4,6 +4,7 @@ namespace App\Actions\Building;
 
 use App\Models\Building;
 use App\Models\Job;
+use App\Models\Pop;
 use App\Models\Save;
 
 class DetailsAction
@@ -21,6 +22,13 @@ class DetailsAction
         if (!$building) {
             abort(404);
         }
+
+        $building->living_pops = Pop::where('building_id', $building->id)
+            ->get()
+            ->mapWithKeys(function ($pop) {
+                return [ $pop->class => $pop ];
+            })
+            ->toArray();
 
         $jobs = Job::query()
             ->where('save_id', $save->id)

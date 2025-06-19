@@ -4,15 +4,17 @@ namespace App\Managers;
 
 use App\Models\Building;
 use App\Models\Job;
+use App\Models\Player;
 use App\Models\Pop;
 use App\Models\Save;
 
 class PopManager
 {
-    public function create(Save $save, Building $building, string $class, int $amount, array $jobs = []): Pop
+    public function create(Save $save, Player $player, Building $building, string $class, int $amount, array $jobs = []): Pop
     {
         $pop = new Pop();
         $pop->save_id = $save->id;
+        $pop->player_id = $player->id;
         $pop->building_id = $building->id;
         $pop->class = $class;
         $pop->amount = $amount;

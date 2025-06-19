@@ -15,6 +15,7 @@ Route::view('game', 'template');
 
 Route::prefix('building')->group(function () {
     Route::post('details', [ BuildingController::class, 'details' ]);
+    Route::post('update/housing_repartition', [ BuildingController::class, 'updateHousingRepartition' ]);
 });
 
 Route::prefix('map')->group(function () {
