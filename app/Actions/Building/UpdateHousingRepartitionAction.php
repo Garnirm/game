@@ -21,6 +21,15 @@ class UpdateHousingRepartitionAction
             abort(404);
         }
 
+        $housing_repartition = $building->housing_repartition;
+        $housing_repartition['worker'] = $params['housing_worker'];
+        $housing_repartition['specialist'] = $params['housing_specialist'];
+        $housing_repartition['engineer'] = $params['housing_engineer'];
+        $housing_repartition['elite'] = $params['housing_elite'];
+
+        $building->housing_repartition = $housing_repartition;
+        $building->save();
+
         return [ 'success' => true ];
     }
 }

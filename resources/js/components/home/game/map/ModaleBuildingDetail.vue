@@ -158,7 +158,20 @@ export default {
 
     methods: {
         decreaseHousing: function (housing_class) {
+            this.building.housing_repartition[ housing_class ]--
+        },
+        increaseHousing: function (housing_class) {
+            this.building.housing_repartition[ housing_class ]++
+        },
 
+        update: function () {
+            axios.post('/building/update/housing_repartition', {
+                save_id: this.save_id, building_id: this.building.id,
+                housing_worker: this.building.housing_repartition.worker,
+                housing_specialist: this.building.housing_repartition.specialist,
+                housing_engineer: this.building.housing_repartition.engineer,
+                housing_elite: this.building.housing_repartition.elite,
+            })
         },
 
         getDetails: function (data_event) {

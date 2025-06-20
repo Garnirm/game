@@ -219,14 +219,14 @@ export default {
                 }
 
                 .tile-building {
-                    font-size: 13px;
+                    font-size: 12px;
                     left: 8px;
                     position: absolute;
                     top: 8px;
                 }
 
                 .tile-unlockable {
-                    background: linear-gradient(315deg,#608A32 25px,white 0);
+                    background: linear-gradient(315deg,#608A32 15px,white 0);
                     height: v-bind(height_unlockable_px);
                     position: absolute;
                     width: v-bind(width_unlockable_px);
