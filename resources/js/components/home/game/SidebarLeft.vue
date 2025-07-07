@@ -48,6 +48,7 @@ export default {
                 { label: 'Monnaie', var_amount: 'money', var_balance: 'production_balance_money' },
                 { label: 'Influence', var_amount: 'influence', var_balance: 'production_balance_influence' },
                 { label: 'Nourriture', var_amount: 'food', var_balance: 'production_balance_food' },
+                { label: 'Blé', var_amount: 'wheat', var_balance: 'production_balance_wheat' },
                 { label: 'Acier', var_amount: 'steel', var_balance: 'production_balance_steel' },
                 { label: 'Béton', var_amount: 'concrete', var_balance: 'production_balance_concrete' },
                 { label: 'Bois', var_amount: 'wood', var_balance: 'production_balance_wood' },
@@ -60,6 +61,7 @@ export default {
 
         concrete: function () { return this.$store.getters['resources/get_resource']('concrete') },
         food: function () { return this.$store.getters['resources/get_resource']('food') },
+        wheat: function () { return this.$store.getters['resources/get_resource']('wheat') },
         influence: function () { return this.$store.getters['resources/get_resource']('influence') },
         money: function () { return this.$store.getters['resources/get_resource']('money') },
         steel: function () { return this.$store.getters['resources/get_resource']('steel') },
@@ -67,6 +69,7 @@ export default {
 
         production_balance_concrete: function () { return this.$store.getters['resources/get_production_balance']('concrete') },
         production_balance_food: function () { return this.$store.getters['resources/get_production_balance']('food') },
+        production_balance_wheat: function () { return this.$store.getters['resources/get_production_balance']('wheat') },
         production_balance_influence: function () { return this.$store.getters['resources/get_production_balance']('influence') },
         production_balance_money: function () { return this.$store.getters['resources/get_production_balance']('money') },
         production_balance_steel: function () { return this.$store.getters['resources/get_production_balance']('steel') },

@@ -12,9 +12,9 @@ return [
     ],
 
     'buildings' => [
-        [ 'name' => 'Hôtel de ville', 'type' => 'city_hall', 'tiles' => [ '0_0' ] ],
+        [ 'name' => 'Hôtel de ville', 'type' => 'city_hall', 'tiles' => [ '0_0' ], 'floors' => 1 ],
         [
-            'name' => 'Immeuble', 'type' => 'apartments', 'id' => 'Immeuble 1', 'tiles' => [ 'neg2_0', 'neg3_0' ],
+            'name' => 'Immeuble', 'type' => 'apartments', 'id' => 'Immeuble 1', 'tiles' => [ 'neg2_0', 'neg3_0' ], 'floors' => 4,
             'housing_repartition' => [
                 'elite' => 1,
                 'engineer' => 1,

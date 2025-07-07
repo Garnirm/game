@@ -41,6 +41,8 @@ export default {
 
             map_tiles: [],
 
+            road_types: [ 'horizontal_road', 'intersection_road_bottom', 'vertical_road' ],
+
             tiles_types: {
                 horizontal_road: 'tile-horizontal-road',
                 intersection_road_bottom: 'tile-intersection-road-bottom',
@@ -151,6 +153,19 @@ export default {
                                 }
 
                                 if (top_neighbor_tile in buildings && buildings[ top_neighbor_tile ].id === tile.building.id) {
+                                    classes.push('no-top-border');
+                                }
+                            }
+
+                            if (tile.building && this.road_types.includes(tile.building.type)) {
+                                let left_neighbor_tile = (tile_x - 1)+'/'+tile_y
+                                let top_neighbor_tile = tile_x+'/'+(tile_y - 1)
+
+                                if (left_neighbor_tile in buildings && this.road_types.includes(buildings[ left_neighbor_tile ].type)) {
+                                    classes.push('no-left-border');
+                                }
+
+                                if (top_neighbor_tile in buildings && this.road_types.includes(buildings[ top_neighbor_tile ].type)) {
                                     classes.push('no-top-border');
                                 }
                             }
