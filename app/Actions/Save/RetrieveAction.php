@@ -24,7 +24,7 @@ class RetrieveAction
 
         $player = Player::where('save_id', $save->id)->where('is_ai', false)->first();
 
-        $production_balance = $save->production;
+        $production_balance = $player->production;
 
         foreach ($player->upkeep as $resource => $amount) {
             if (!isset($production_balance[ $resource ])) {

@@ -58,6 +58,7 @@ class BuildingManager
             $job_model->type = $job;
             $job_model->amount = $amount * count($coordinates);
             $job_model->taken = 0;
+            $job_model->production = config('game_design.jobs.'.$job.'.production', []);
             $job_model->save();
         }
 

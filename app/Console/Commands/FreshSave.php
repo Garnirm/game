@@ -6,6 +6,7 @@ use App\Actions\Save\CreateAction;
 use App\Models\Building;
 use App\Models\City;
 use App\Models\Job;
+use App\Models\Player;
 use App\Models\Pop;
 use App\Models\Save;
 use App\Models\Tile;
@@ -26,6 +27,7 @@ class FreshSave extends Command
             Job::where('save_id', $save->id)->forceDelete();
             Pop::where('save_id', $save->id)->forceDelete();
             Tile::where('save_id', $save->id)->forceDelete();
+            Player::where('save_id', $save->id)->forceDelete();
             Save::where('id', $save->id)->forceDelete();
         }
 

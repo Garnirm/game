@@ -10,6 +10,7 @@ use App\Models\City;
 use App\Models\Player;
 use App\Models\Save;
 use App\Services\TransformNegative;
+use App\Services\UpdatePlayerProduction;
 use App\Services\UpdatePlayerUpkeep;
 use Illuminate\Support\Collection;
 
@@ -108,6 +109,7 @@ class CreateAction
             }
         }
 
+        app(UpdatePlayerProduction::class)->handle($player);
         app(UpdatePlayerUpkeep::class)->handle($player);
 
         return [

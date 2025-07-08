@@ -36,7 +36,7 @@ class DetailsAction
             ->toBase()
             ->get()
             ->map(function ($job) {
-                $job->label = config('game_design.codex.jobs.'.$job->type.'.label');
+                $job->label = config('game_design.jobs.'.$job->type.'.label');
 
                 return $job;
             })
