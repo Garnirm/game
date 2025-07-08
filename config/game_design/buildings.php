@@ -4,8 +4,6 @@ return [
     'apartments' => [
         'base_floor' => 4,
         'base_housing' => 25,
-        'base_jobs' => [],
-        'base_production' => [],
 
         'base_upkeep' => [
             'money' => 100,
@@ -20,10 +18,11 @@ return [
 
     'beef_farm' => [
         'base_floor' => 0,
-        'base_production' => [
-            'beef_meat' => 50,
+
+        'base_capacity_animals' => [
+            'beef' => 40,
         ],
-        'base_housing' => 0,
+
         'base_jobs' => [
             'beef_farmer' => 1,
         ],
@@ -39,9 +38,26 @@ return [
         ],
     ],
 
+    'beef_slaughterhouse' => [
+        'base_floor' => 1,
+
+        'base_jobs' => [
+            'beef_slaughterhouse_employee' => 10,
+        ],
+
+        'base_upkeep' => [
+            'money' => 200,
+        ],
+
+        'base_cost' => [
+            'money' => 25000,
+            'concrete' => 1000,
+            'steel' => 600,
+        ],
+    ],
+
     'city_hall' => [
         'base_floor' => 2,
-        'base_production' => [],
 
         'base_jobs' => [
             'administrative_job' => 5,
@@ -61,8 +77,6 @@ return [
 
     'farm_house' => [
         'base_floor' => 1,
-        'base_jobs' => [],
-        'base_production' => [],
         'base_housing' => 3,
 
         'base_upkeep' => [
@@ -78,9 +92,6 @@ return [
 
     'horizontal_road' => [
         'base_floor' => 0,
-        'base_jobs' => [],
-        'base_production' => [],
-        'base_housing' => 0,
 
         'base_upkeep' => [
             'money' => 80,
@@ -95,9 +106,6 @@ return [
 
     'intersection_road_bottom' => [
         'base_floor' => 0,
-        'base_jobs' => [],
-        'base_production' => [],
-        'base_housing' => 0,
 
         'base_upkeep' => [
             'money' => 110,
@@ -112,9 +120,7 @@ return [
 
     'vehicle_farm_shed' => [
         'base_floor' => 0,
-        'base_jobs' => [],
-        'base_production' => [],
-        'base_housing' => 0,
+        'base_capacity_vehicle' => 4,
 
         'base_upkeep' => [
             'money' => 40,
@@ -128,9 +134,6 @@ return [
 
     'vertical_road' => [
         'base_floor' => 0,
-        'base_jobs' => [],
-        'base_production' => [],
-        'base_housing' => 0,
 
         'base_upkeep' => [
             'money' => 80,
@@ -145,13 +148,14 @@ return [
 
     'wheat_field' => [
         'base_floor' => 0,
+
         'base_jobs' => [
             'wheat_farmer' => 2,
         ],
+
         'base_production' => [
             'wheat' => 50,
         ],
-        'base_housing' => 0,
 
         'base_upkeep' => [
             'money' => 50,

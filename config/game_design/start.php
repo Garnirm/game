@@ -32,6 +32,7 @@ return [
         [ 'name' => 'Hangar de ferme pour véhicules', 'type' => 'vehicle_farm_shed', 'id' => 'Hangar de ferme pour véhicules 1', 'tiles' => [ 'neg3_neg3' ] ],
         [ 'name' => 'Champ de blé', 'type' => 'wheat_field', 'id' => 'Champ de blé 1', 'tiles' => [ 'neg2_neg2', 'neg2_neg3' ] ],
         [ 'name' => 'Exploitation bovine', 'type' => 'beef_farm', 'id' => 'Exploitation bovine 1', 'tiles' => [ 'neg4_neg2', 'neg4_neg3' ] ],
+        [ 'name' => 'Abattoir bovin', 'type' => 'beef_slaughterhouse', 'id' => 'Abattoir bovin 1', 'tiles' => [ 'neg4_0' ] ],
     ],
 
     'pops' => [
@@ -53,6 +54,7 @@ return [
                 'jobs' => [
                     [ 'job' => 'wheat_farmer', 'building_coordinates' => '-2_-2', 'amount' => 1 ],
                     [ 'job' => 'beef_farmer', 'building_coordinates' => '-4_-2', 'amount' => 2 ],
+                    [ 'job' => 'beef_slaughterhouse_employee', 'building_coordinates' => '-4_0', 'amount' => 10 ],
                 ],
             ],
         ],
@@ -78,6 +80,8 @@ return [
         [ 'x' => -3, 'y' => -1, 'type' => 'horizontal_road', 'name' => 'Route' ],
 
         [ 'x' => -4, 'y' => -1, 'type' => 'horizontal_road', 'name' => 'Route' ],
+
+        [ 'x' => -5, 'y' => -1, 'type' => 'horizontal_road', 'name' => 'Route' ],
     ],
 
     'tiles' => [
@@ -100,5 +104,8 @@ return [
         [ 'name' => 'neg4_neg3', 'coord_x' => -4, 'coord_y' => -3, 'type' => 'building', 'biome' => 'plains' ],
         [ 'name' => 'neg4_neg2', 'coord_x' => -4, 'coord_y' => -2, 'type' => 'building', 'biome' => 'plains' ],
         [ 'name' => 'neg4_neg1', 'coord_x' => -4, 'coord_y' => -1, 'type' => 'building', 'biome' => 'plains' ],
+        [ 'name' => 'neg4_0', 'coord_x' => -4, 'coord_y' => 0, 'type' => 'building', 'biome' => 'plains' ],
+
+        [ 'name' => 'neg5_neg1', 'coord_x' => -5, 'coord_y' => -1, 'type' => 'building', 'biome' => 'plains' ],
     ],
 ];

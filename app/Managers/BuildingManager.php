@@ -14,7 +14,7 @@ class BuildingManager
 {
     public function create(
         Save $save, Player $player, ?City $city = null, iterable $tiles, string $name, string $type, int $floor, array $jobs = [], array $upkeep = [], array $production = [],
-        ?int $housing = null, array $cost = [], array $housing_repartition = [],
+        ?int $housing = null, array $cost = [], array $housing_repartition = [], array $base_capacity_animals = [], ?int $base_capacity_vehicle = null,
     ): Building
     {
         $tiles_collection = new Collection($tiles);
@@ -44,6 +44,8 @@ class BuildingManager
         $building->housing = $housing * count($coordinates);
         $building->coordinates = $coordinates->toArray();
         $building->housing_repartition = $housing_repartition;
+        $building->base_capacity_animals = $base_capacity_animals;
+        $building->base_capacity_vehicle = $base_capacity_vehicle;
         $building->save();
 
         app(UpdateSave::class)->handle($save, $building);

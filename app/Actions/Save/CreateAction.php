@@ -66,9 +66,9 @@ class CreateAction
             BuildingFacade::create(
                 save: $save, player: $player, city: $city, name: $road['name'], type: $road['type'],
                 floor: config('game_design.buildings.'.$road['type'].'.base_floor'),
-                jobs: config('game_design.buildings.'.$road['type'].'.base_jobs'),
-                upkeep: config('game_design.buildings.'.$road['type'].'.base_upkeep'),
-                production: config('game_design.buildings.'.$road['type'].'.base_production'),
+                jobs: config('game_design.buildings.'.$road['type'].'.base_jobs', []),
+                upkeep: config('game_design.buildings.'.$road['type'].'.base_upkeep', []),
+                production: config('game_design.buildings.'.$road['type'].'.base_production', []),
                 cost: config('game_design.buildings.'.$road['type'].'.base_cost'),
                 tiles: [ $tiles[ $variable ] ],
             );
@@ -78,13 +78,15 @@ class CreateAction
             BuildingFacade::create(
                 save: $save, player: $player, city: $city, name: $building['name'], type: $building['type'],
                 floor: config('game_design.buildings.'.$building['type'].'.base_floor'),
-                jobs: config('game_design.buildings.'.$building['type'].'.base_jobs'),
-                upkeep: config('game_design.buildings.'.$building['type'].'.base_upkeep'),
-                production: config('game_design.buildings.'.$building['type'].'.base_production'),
+                jobs: config('game_design.buildings.'.$building['type'].'.base_jobs', []),
+                upkeep: config('game_design.buildings.'.$building['type'].'.base_upkeep', []),
+                production: config('game_design.buildings.'.$building['type'].'.base_production', []),
                 housing: config('game_design.buildings.'.$building['type'].'.base_housing'),
-                cost: config('game_design.buildings.'.$building['type'].'.base_cost'),
+                cost: config('game_design.buildings.'.$building['type'].'.base_cost', []),
                 tiles: (new Collection($building['tiles']))->map(fn ($tile) => $tiles[ $tile ]),
                 housing_repartition: $building['housing_repartition'] ?? [],
+                base_capacity_animals: config('game_design.buildings.'.$building['type'].'.base_capacity_animals', []),
+                base_capacity_vehicle: config('game_design.buildings.'.$building['type'].'.base_capacity_vehicle'),
             );
         }
 

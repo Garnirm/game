@@ -45,6 +45,12 @@ return [
             'label' => 'Eléveur de bovin',
             'pop_class' => 'worker',
         ],
+        'beef_slaughterhouse_employee' => [
+            'label' => 'Employé d\'abattoir bovin',
+            'pop_class' => 'worker',
+            'production' => [ 'beef_meat' => 4 ],
+            'animals_consumption' => [ 'beef' => 1 ],
+        ],
         'mayor' => [
             'label' => 'Maire',
             'pop_class' => 'elite',
