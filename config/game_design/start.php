@@ -2,13 +2,14 @@
 
 return [
     'resources' => [
-        'concrete' => [ 'easy' => 4000000, 'normal' => 3000000, 'hard' => 2000000 ],
-        'food' => [ 'easy' => 300000, 'normal' => 200000, 'hard' => 100000 ],
-        'wheat' => [ 'easy' => 100000, 'normal' => 50000, 'hard' => 25000 ], // Blé
+        'beef_meat' => [ 'easy' => 10000, 'normal' => 5000, 'hard' => 2500 ], // Viande de boeuf
+        'concrete' => [ 'easy' => 4000000, 'normal' => 3000000, 'hard' => 2000000 ], // Béton
+        'food' => [ 'easy' => 300000, 'normal' => 200000, 'hard' => 100000 ], // Nourriture
+        'wheat' => [ 'easy' => 10000, 'normal' => 5000, 'hard' => 2500 ], // Blé
         'influence' => [ 'easy' => 100, 'normal' => 50, 'hard' => 20 ],
         'money' => [ 'easy' => 5000000, 'normal' => 2000000, 'hard' => 1000000 ],
-        'steel' => [ 'easy' => 500000, 'normal' => 250000, 'hard' => 100000 ],
-        'wood' => [ 'easy' => 50000, 'normal' => 25000, 'hard' => 10000 ],
+        'steel' => [ 'easy' => 500000, 'normal' => 250000, 'hard' => 100000 ], // Acier
+        'wood' => [ 'easy' => 50000, 'normal' => 25000, 'hard' => 10000 ], // Bois
     ],
 
     'buildings' => [
@@ -30,6 +31,7 @@ return [
         ],
         [ 'name' => 'Hangar de ferme pour véhicules', 'type' => 'vehicle_farm_shed', 'id' => 'Hangar de ferme pour véhicules 1', 'tiles' => [ 'neg3_neg3' ] ],
         [ 'name' => 'Champ de blé', 'type' => 'wheat_field', 'id' => 'Champ de blé 1', 'tiles' => [ 'neg2_neg2', 'neg2_neg3' ] ],
+        [ 'name' => 'Exploitation bovine', 'type' => 'beef_farm', 'id' => 'Exploitation bovine 1', 'tiles' => [ 'neg4_neg2', 'neg4_neg3' ] ],
     ],
 
     'pops' => [
@@ -48,7 +50,10 @@ return [
             ],
             'worker' => [
                 'amount' => 25,
-                'jobs' => [],
+                'jobs' => [
+                    [ 'job' => 'wheat_farmer', 'building_coordinates' => '-2_-2', 'amount' => 1 ],
+                    [ 'job' => 'beef_farmer', 'building_coordinates' => '-4_-2', 'amount' => 2 ],
+                ],
             ],
         ],
 
@@ -71,6 +76,8 @@ return [
         [ 'x' => -2, 'y' => -1, 'type' => 'horizontal_road', 'name' => 'Route' ],
 
         [ 'x' => -3, 'y' => -1, 'type' => 'horizontal_road', 'name' => 'Route' ],
+
+        [ 'x' => -4, 'y' => -1, 'type' => 'horizontal_road', 'name' => 'Route' ],
     ],
 
     'tiles' => [
@@ -89,5 +96,9 @@ return [
         [ 'name' => 'neg3_neg2', 'coord_x' => -3, 'coord_y' => -2, 'type' => 'building', 'biome' => 'plains' ],
         [ 'name' => 'neg3_neg1', 'coord_x' => -3, 'coord_y' => -1, 'type' => 'building', 'biome' => 'plains' ],
         [ 'name' => 'neg3_0', 'coord_x' => -3, 'coord_y' => 0, 'type' => 'building', 'biome' => 'plains' ],
+
+        [ 'name' => 'neg4_neg3', 'coord_x' => -4, 'coord_y' => -3, 'type' => 'building', 'biome' => 'plains' ],
+        [ 'name' => 'neg4_neg2', 'coord_x' => -4, 'coord_y' => -2, 'type' => 'building', 'biome' => 'plains' ],
+        [ 'name' => 'neg4_neg1', 'coord_x' => -4, 'coord_y' => -1, 'type' => 'building', 'biome' => 'plains' ],
     ],
 ];

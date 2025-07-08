@@ -18,6 +18,27 @@ return [
         ],
     ],
 
+    'beef_farm' => [
+        'base_floor' => 0,
+        'base_production' => [
+            'beef_meat' => 50,
+        ],
+        'base_housing' => 0,
+        'base_jobs' => [
+            'beef_farmer' => 1,
+        ],
+
+        'base_upkeep' => [
+            'money' => 60,
+            'wheat' => 5,
+        ],
+
+        'base_cost' => [
+            'money' => 500,
+            'wood' => 20,
+        ],
+    ],
+
     'city_hall' => [
         'base_floor' => 2,
         'base_production' => [],

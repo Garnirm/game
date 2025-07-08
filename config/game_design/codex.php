@@ -7,6 +7,7 @@ return [
             'upkeep' => [
                 'food' => 2,
                 'wheat' => 1,
+                'beef_meat' => 2,
             ],
         ],
         'specialist' => [
@@ -14,6 +15,7 @@ return [
             'upkeep' => [
                 'food' => 4,
                 'wheat' => 2,
+                'beef_meat' => 4,
             ],
         ],
         'engineer' => [
@@ -21,6 +23,7 @@ return [
             'upkeep' => [
                 'food' => 6,
                 'wheat' => 4,
+                'beef_meat' => 6,
             ],
         ],
         'elite' => [
@@ -28,6 +31,7 @@ return [
             'upkeep' => [
                 'food' => 7,
                 'wheat' => 6,
+                'beef_meat' => 7,
             ],
         ],
     ],
@@ -36,6 +40,10 @@ return [
         'administrative_job' => [
             'label' => 'Emploi administratif',
             'pop_class' => 'specialist',
+        ],
+        'beef_farmer' => [
+            'label' => 'Eléveur de bovin',
+            'pop_class' => 'worker',
         ],
         'mayor' => [
             'label' => 'Maire',
