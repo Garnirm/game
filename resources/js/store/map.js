@@ -1,8 +1,8 @@
 // State
 var coord_position_view = null
 
-var height_tile = 50
-var width_tile = 50
+var height_tile = 70
+var width_tile = 70
 
 // Getters
 function get_coord_position_view (state) {

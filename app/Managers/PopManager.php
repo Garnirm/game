@@ -33,14 +33,14 @@ class PopManager
                 ])
                 ->first();
 
-            $job = Job::query()
-                ->where('save_id', $save->id)
+            $job_model = Job::query()
+                ->where('player_id', $player->id)
                 ->where('building_id', $building->id)
                 ->where('type', $job['job'])
                 ->first();
 
-            $job->taken = $job->taken + $job['amount'];
-            $job->save();
+            $job_model->taken = $job_model->taken + $job['amount'];
+            $job_model->save();
         }
 
         return $pop;

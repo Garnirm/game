@@ -51,6 +51,7 @@ class BuildingManager
         foreach ($jobs as $job => $amount) {
             $job_model = new Job();
             $job_model->save_id = $save->id;
+            $job_model->player_id = $player->id;
             $job_model->building_id = $building->id;
             $job_model->type = $job;
             $job_model->amount = $amount * count($coordinates);

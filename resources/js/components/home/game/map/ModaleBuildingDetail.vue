@@ -117,7 +117,7 @@ export default {
                 return 0
             }
 
-            return this.building.housing_repartition.worker * this.consumption_worker
+            return this.building.housing_repartition.worker ?? 0 * this.consumption_worker
         },
 
         total_consumption_housing_specialist: function () {
@@ -125,7 +125,7 @@ export default {
                 return 0
             }
 
-            return this.building.housing_repartition.specialist * this.consumption_specialist
+            return this.building.housing_repartition.specialist ?? 0 * this.consumption_specialist
         },
 
         total_consumption_housing_engineer: function () {
@@ -133,7 +133,7 @@ export default {
                 return 0
             }
 
-            return this.building.housing_repartition.engineer * this.consumption_engineer
+            return this.building.housing_repartition.engineer ?? 0 * this.consumption_engineer
         },
 
         total_consumption_housing_elite: function () {
@@ -141,7 +141,7 @@ export default {
                 return 0
             }
 
-            return this.building.housing_repartition.elite * this.consumption_elite
+            return this.building.housing_repartition.elite ?? 0 * this.consumption_elite
         },
 
         consumption_worker: function () { return this.$store.getters['game/get_housing_consumption']('worker') },

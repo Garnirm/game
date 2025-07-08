@@ -234,10 +234,11 @@ export default {
                 }
 
                 .tile-building {
-                    font-size: 12px;
-                    left: 8px;
+                    font-size: 11px;
+                    left: 6px;
                     position: absolute;
-                    top: 8px;
+                    top: 6px;
+                    width: calc(100% - 6px);
                 }
 
                 .tile-unlockable {

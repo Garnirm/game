@@ -22,17 +22,17 @@ class RetrieveAction
             abort(404);
         }
 
+        $player = Player::where('save_id', $save->id)->where('is_ai', false)->first();
+
         $production_balance = $save->production;
 
-        foreach ($save->upkeep as $resource => $amount) {
+        foreach ($player->upkeep as $resource => $amount) {
             if (!isset($production_balance[ $resource ])) {
                 $production_balance[ $resource ] = 0;
             }
 
             $production_balance[ $resource ] -= $amount;
         }
-
-        $player = Player::where('save_id', $save->id)->where('is_ai', false)->first();
 
         return [
             'success' => true,
@@ -42,7 +42,7 @@ class RetrieveAction
                 'resources' => $player->resources,
                 'position_view_tile' => $position_view_tile,
                 'nb_unlockable_tiles' => $player->nb_unlockable_tiles,
-                'upkeep' => $save->upkeep,
+                'upkeep' => $player->upkeep,
                 'production' => $save->production,
                 'production_balance' => $production_balance,
             ],

@@ -2,7 +2,7 @@
 
 return [
     'apartments' => [
-        'base_floor' => 3,
+        'base_floor' => 4,
         'base_housing' => 25,
         'base_jobs' => [],
         'base_production' => [],
@@ -38,10 +38,28 @@ return [
         ],
     ],
 
+    'farm_house' => [
+        'base_floor' => 1,
+        'base_jobs' => [],
+        'base_production' => [],
+        'base_housing' => 3,
+
+        'base_upkeep' => [
+            'money' => 50,
+        ],
+
+        'base_cost' => [
+            'money' => 8000,
+            'wood' => 400,
+            'concrete' => 1000,
+        ],
+    ],
+
     'horizontal_road' => [
         'base_floor' => 0,
         'base_jobs' => [],
         'base_production' => [],
+        'base_housing' => 0,
 
         'base_upkeep' => [
             'money' => 80,
@@ -58,6 +76,7 @@ return [
         'base_floor' => 0,
         'base_jobs' => [],
         'base_production' => [],
+        'base_housing' => 0,
 
         'base_upkeep' => [
             'money' => 110,
@@ -70,10 +89,27 @@ return [
         ],
     ],
 
+    'vehicle_farm_shed' => [
+        'base_floor' => 0,
+        'base_jobs' => [],
+        'base_production' => [],
+        'base_housing' => 0,
+
+        'base_upkeep' => [
+            'money' => 40,
+        ],
+
+        'base_cost' => [
+            'money' => 5000,
+            'steel' => 100,
+        ],
+    ],
+
     'vertical_road' => [
         'base_floor' => 0,
         'base_jobs' => [],
         'base_production' => [],
+        'base_housing' => 0,
 
         'base_upkeep' => [
             'money' => 80,
@@ -83,6 +119,25 @@ return [
         'base_cost' => [
             'money' => 500,
             'concrete' => 200,
+        ],
+    ],
+
+    'wheat_field' => [
+        'base_floor' => 0,
+        'base_jobs' => [
+            'wheat_farmer' => 2,
+        ],
+        'base_production' => [
+            'wheat' => 50,
+        ],
+        'base_housing' => 0,
+
+        'base_upkeep' => [
+            'money' => 50,
+        ],
+
+        'base_cost' => [
+            'money' => 1000,
         ],
     ],
 ];

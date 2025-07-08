@@ -10,6 +10,7 @@ use App\Models\City;
 use App\Models\Player;
 use App\Models\Save;
 use App\Services\TransformNegative;
+use App\Services\UpdatePlayerUpkeep;
 use Illuminate\Support\Collection;
 
 class CreateAction
@@ -93,7 +94,7 @@ class CreateAction
             $x = TransformNegative::castToRealNumber($x);
             $y = TransformNegative::castToRealNumber($y);
 
-            $building = Building::query()->where('save_id', $save->id)
+            $building = Building::query()->where('player_id', $player->id)
                 ->where('coordinates', 'elemMatch', [
                     'x' => [ '$eq' => $x ],
                     'y' => [ '$eq' => $y ],
@@ -104,6 +105,8 @@ class CreateAction
                 PopFacade::create(save: $save, player: $player, building: $building, class: $class, amount: $data_class['amount'], jobs: $data_class['jobs']);
             }
         }
+
+        app(UpdatePlayerUpkeep::class)->handle($player);
 
         return [
             'success' => true,

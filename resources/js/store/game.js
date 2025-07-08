@@ -1,5 +1,5 @@
 // State
-var save_id = '686c2069c09d49003808aee2'
+var save_id = '686d8c0943aa70bfa20ef5b2'
 
 var housing_consumption = {}
 
