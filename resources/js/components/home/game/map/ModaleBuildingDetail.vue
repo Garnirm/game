@@ -41,7 +41,7 @@
 
                             <tbody>
                                 <tr v-for="(amount, housing_class) in building.housing_repartition" :key="housing_class">
-                                    <td>{{ housing_class }}</td>
+                                    <td>{{ housing_class_labels[ housing_class ] }}</td>
                                     <td>
                                         <template v-if="building.living_pops[ housing_class ]">
                                             {{ building.living_pops[ housing_class ].amount }}
@@ -101,6 +101,10 @@ export default {
             jobs: [],
 
             visible: false,
+
+            housing_class_labels: {
+                child: 'Enfant', worker: 'Employé', specialist: 'Spécialiste', engineer: 'Ingénieur', elite: 'Elite',
+            },
         }
     },
 
@@ -110,6 +114,15 @@ export default {
                 + this.total_consumption_housing_specialist
                 + this.total_consumption_housing_engineer
                 + this.total_consumption_housing_elite
+                + this.total_consumption_housing_child
+        },
+
+        total_consumption_housing_child: function () {
+            if (!this.building.housing || this.building.housing < 1) {
+                return 0
+            }
+
+            return this.building.housing_repartition.child ?? 0 * this.consumption_child
         },
 
         total_consumption_housing_worker: function () {
@@ -144,6 +157,7 @@ export default {
             return this.building.housing_repartition.elite ?? 0 * this.consumption_elite
         },
 
+        consumption_child: function () { return this.$store.getters['game/get_housing_consumption']('child') },
         consumption_worker: function () { return this.$store.getters['game/get_housing_consumption']('worker') },
         consumption_specialist: function () { return this.$store.getters['game/get_housing_consumption']('specialist') },
         consumption_engineer: function () { return this.$store.getters['game/get_housing_consumption']('engineer') },

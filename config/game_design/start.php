@@ -15,12 +15,13 @@ return [
     'buildings' => [
         [ 'name' => 'Hôtel de ville', 'type' => 'city_hall', 'tiles' => [ '0_0' ] ],
         [
-            'name' => 'Immeuble', 'type' => 'apartments', 'id' => 'Immeuble 1', 'tiles' => [ 'neg2_0', 'neg3_0' ],
+            'name' => 'Immeuble', 'type' => 'apartments', 'id' => 'Immeuble 1', 'tiles' => [ 'neg2_0', 'neg2_1', 'neg3_0', 'neg3_1' ],
             'housing_repartition' => [
                 'elite' => 1,
                 'engineer' => 1,
                 'specialist' => 5,
-                'worker' => 33,
+                'worker' => 25,
+                'child' => 10,
             ],
         ],
         [
@@ -57,6 +58,9 @@ return [
                     [ 'job' => 'beef_slaughterhouse_employee', 'building_coordinates' => '-4_0', 'amount' => 10 ],
                 ],
             ],
+            'child' => [
+                'amount' => 10,
+            ],
         ],
 
         'neg3_neg2' => [
@@ -74,6 +78,7 @@ return [
 
         [ 'x' => -1, 'y' => -1, 'type' => 'intersection_road_bottom', 'name' => 'Intersection' ],
         [ 'x' => -1, 'y' => 0, 'type' => 'vertical_road', 'name' => 'Route' ],
+        [ 'x' => -1, 'y' => 1, 'type' => 'vertical_road', 'name' => 'Route' ],
 
         [ 'x' => -2, 'y' => -1, 'type' => 'horizontal_road', 'name' => 'Route' ],
 
@@ -87,6 +92,7 @@ return [
     'tiles' => [
         [ 'name' => 'neg1_neg1', 'coord_x' => -1, 'coord_y' => -1, 'type' => 'building', 'biome' => 'plains' ],
         [ 'name' => 'neg1_0', 'coord_x' => -1, 'coord_y' => 0, 'type' => 'building', 'biome' => 'plains' ],
+        [ 'name' => 'neg1_1', 'coord_x' => -1, 'coord_y' => 1, 'type' => 'building', 'biome' => 'plains' ],
 
         [ 'name' => '0_neg1', 'coord_x' => 0, 'coord_y' => -1, 'type' => 'building', 'biome' => 'plains' ],
         [ 'name' => '0_0', 'coord_x' => 0, 'coord_y' => 0, 'type' => 'building', 'biome' => 'plains' ],
@@ -95,11 +101,13 @@ return [
         [ 'name' => 'neg2_neg2', 'coord_x' => -2, 'coord_y' => -2, 'type' => 'building', 'biome' => 'plains' ],
         [ 'name' => 'neg2_neg1', 'coord_x' => -2, 'coord_y' => -1, 'type' => 'building', 'biome' => 'plains' ],
         [ 'name' => 'neg2_0', 'coord_x' => -2, 'coord_y' => 0, 'type' => 'building', 'biome' => 'plains' ],
+        [ 'name' => 'neg2_1', 'coord_x' => -2, 'coord_y' => 1, 'type' => 'building', 'biome' => 'plains' ],
 
         [ 'name' => 'neg3_neg3', 'coord_x' => -3, 'coord_y' => -3, 'type' => 'building', 'biome' => 'plains' ],
         [ 'name' => 'neg3_neg2', 'coord_x' => -3, 'coord_y' => -2, 'type' => 'building', 'biome' => 'plains' ],
         [ 'name' => 'neg3_neg1', 'coord_x' => -3, 'coord_y' => -1, 'type' => 'building', 'biome' => 'plains' ],
         [ 'name' => 'neg3_0', 'coord_x' => -3, 'coord_y' => 0, 'type' => 'building', 'biome' => 'plains' ],
+        [ 'name' => 'neg3_1', 'coord_x' => -3, 'coord_y' => 1, 'type' => 'building', 'biome' => 'plains' ],
 
         [ 'name' => 'neg4_neg3', 'coord_x' => -4, 'coord_y' => -3, 'type' => 'building', 'biome' => 'plains' ],
         [ 'name' => 'neg4_neg2', 'coord_x' => -4, 'coord_y' => -2, 'type' => 'building', 'biome' => 'plains' ],

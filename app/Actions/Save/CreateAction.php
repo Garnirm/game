@@ -105,7 +105,7 @@ class CreateAction
                 ->first();
 
             foreach ($pops_classes as $class => $data_class) {
-                PopFacade::create(save: $save, player: $player, building: $building, class: $class, amount: $data_class['amount'], jobs: $data_class['jobs']);
+                PopFacade::create(save: $save, player: $player, building: $building, class: $class, amount: $data_class['amount'], jobs: $data_class['jobs'] ?? []);
             }
         }
 

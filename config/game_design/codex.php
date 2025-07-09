@@ -2,6 +2,14 @@
 
 return [
     'population_classes' => [
+        'child' => [
+            'housing_consumption' => 1,
+            'upkeep' => [
+                'food' => 1,
+                'wheat' => 1,
+                'beef_meat' => 1,
+            ],
+        ],
         'worker' => [
             'housing_consumption' => 1,
             'upkeep' => [
