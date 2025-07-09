@@ -118,6 +118,24 @@ return [
         ],
     ],
 
+    'school' => [
+        'base_floor' => 2,
+
+        'base_upkeep' => [
+            'money' => 1200,
+        ],
+
+        'base_cost' => [
+            'money' => 40000,
+            'concrete' => 20000,
+            'steel' => 2000,
+        ],
+
+        'base_jobs' => [
+            'teacher' => 5,
+        ],
+    ],
+
     'vehicle_farm_shed' => [
         'base_floor' => 0,
         'base_capacity_vehicle' => 4,

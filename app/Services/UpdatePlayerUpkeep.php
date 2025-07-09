@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Building;
+use App\Models\Job;
 use App\Models\Player;
 use App\Models\Pop;
 
@@ -23,6 +24,18 @@ class UpdatePlayerUpkeep
                 }
 
                 $upkeep[ $resource ] += $resource_amount * $pop->amount;
+            }
+        }
+
+        $jobs = Job::where('player_id', $player->id)->select('upkeep')->get();
+
+        foreach ($jobs as $job) {
+            foreach ($job->upkeep ?? [] as $resource => $resource_amount) {
+                if (!isset($upkeep[ $resource ])) {
+                    $upkeep[ $resource ] = 0;
+                }
+
+                $upkeep[ $resource ] += $resource_amount;
             }
         }
 

@@ -20,6 +20,14 @@ return [
         'pop_class' => 'elite',
         'production' => [ 'influence' => 10 ],
     ],
+    'teacher' => [
+        'label' => 'Professeur',
+        'pop_class' => 'specialist',
+        'child_capacity_teaching' => 20,
+        'upkeep' => [
+            'money' => 50,
+        ],
+    ],
     'wheat_farmer' => [
         'label' => 'Cultivateur de blé',
         'pop_class' => 'worker',

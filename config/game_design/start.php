@@ -34,6 +34,7 @@ return [
         [ 'name' => 'Champ de blé', 'type' => 'wheat_field', 'id' => 'Champ de blé 1', 'tiles' => [ 'neg2_neg2', 'neg2_neg3' ] ],
         [ 'name' => 'Exploitation bovine', 'type' => 'beef_farm', 'id' => 'Exploitation bovine 1', 'tiles' => [ 'neg4_neg2', 'neg4_neg3' ] ],
         [ 'name' => 'Abattoir bovin', 'type' => 'beef_slaughterhouse', 'id' => 'Abattoir bovin 1', 'tiles' => [ 'neg4_0' ] ],
+        [ 'name' => 'Ecole', 'type' => 'school', 'id' => 'Ecole 1', 'tiles' => [ '0_1' ] ],
     ],
 
     'pops' => [
@@ -45,9 +46,10 @@ return [
                 ],
             ],
             'specialist' => [
-                'amount' => 5,
+                'amount' => 8,
                 'jobs' => [
                     [ 'job' => 'administrative_job', 'building_coordinates' => '0_0', 'amount' => 5 ],
+                    [ 'job' => 'teacher', 'building_coordinates' => '0_1', 'amount' => 3 ],
                 ],
             ],
             'worker' => [
@@ -96,6 +98,7 @@ return [
 
         [ 'name' => '0_neg1', 'coord_x' => 0, 'coord_y' => -1, 'type' => 'building', 'biome' => 'plains' ],
         [ 'name' => '0_0', 'coord_x' => 0, 'coord_y' => 0, 'type' => 'building', 'biome' => 'plains' ],
+        [ 'name' => '0_1', 'coord_x' => 0, 'coord_y' => 1, 'type' => 'building', 'biome' => 'plains' ],
 
         [ 'name' => 'neg2_neg3', 'coord_x' => -2, 'coord_y' => -3, 'type' => 'building', 'biome' => 'plains' ],
         [ 'name' => 'neg2_neg2', 'coord_x' => -2, 'coord_y' => -2, 'type' => 'building', 'biome' => 'plains' ],
