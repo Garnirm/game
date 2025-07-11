@@ -9,7 +9,14 @@
                         <div v-if="t?.unlockable" class="tile-unlockable"></div>
 
                         <div class="tile-building" v-if="t.building && displayCoordLabel(t.building, t.coord_x, t.coord_y)">
-                            {{ t.building.name }}
+                            <div class="tile-military-base" v-if="t.type === 'military_base'">
+                                <div class="military-base-left-border" v-if="t.classes.includes('military-base-left-border')"></div>
+                                <div class="military-base-right-border" v-if="t.classes.includes('military-base-right-border')"></div>
+                                <div class="military-base-top-border" v-if="t.classes.includes('military-base-top-border')"></div>
+                                <div class="military-base-bottom-border" v-if="t.classes.includes('military-base-bottom-border')"></div>
+                            </div>
+
+                            <div class="building-name">{{ t.building.name }}</div>
                         </div>
                     </template>
                 </div>
@@ -144,6 +151,30 @@ export default {
 
                             let classes = []
 
+                            if (tile.type === 'military_base') {
+                                let left_neighbor_tile = (tile_x - 1)+'/'+tile_y
+                                let right_neighbor_tile = (tile_x + 1)+'/'+tile_y
+
+                                let top_neighbor_tile = tile_x+'/'+(tile_y - 1)
+                                let bottom_neighbor_tile = tile_x+'/'+(tile_y + 1)
+
+                                if (left_neighbor_tile in tiles && tiles[ left_neighbor_tile ].type !== 'military_base') {
+                                    classes.push('military-base-left-border')
+                                }
+
+                                if (right_neighbor_tile in tiles && tiles[ right_neighbor_tile ].type !== 'military_base') {
+                                    classes.push('military-base-right-border')
+                                }
+
+                                if (top_neighbor_tile in tiles && tiles[ top_neighbor_tile ].type !== 'military_base') {
+                                    classes.push('military-base-top-border')
+                                }
+
+                                if (bottom_neighbor_tile in tiles && tiles[ bottom_neighbor_tile ].type !== 'military_base') {
+                                    classes.push('military-base-bottom-border')
+                                }
+                            }
+
                             if (tile.building && tile.building.coordinates.length > 1) {
                                 let left_neighbor_tile = (tile_x - 1)+'/'+tile_y
                                 let top_neighbor_tile = tile_x+'/'+(tile_y - 1)
@@ -235,10 +266,53 @@ export default {
 
                 .tile-building {
                     font-size: 11px;
-                    left: 6px;
+                    height: 100%;
+                    left: 0;
                     position: absolute;
-                    top: 6px;
-                    width: calc(100% - 6px);
+                    top: 0;
+                    width: 100%;
+
+                    .building-name {
+                        padding-left: 6px;
+                        padding-right: 6px;
+                        padding-top: 6px;
+                    }
+
+                    .tile-military-base {
+                        .military-base-left-border, .military-base-right-border, .military-base-top-border, .military-base-bottom-border {
+                            background-color: black;
+                            position: absolute;
+                            z-index: 1;
+                        }
+
+                        .military-base-left-border {
+                            left: 0;
+                            height: 100%;
+                            top: 0;
+                            width: 2px;
+                        }
+
+                        .military-base-right-border {
+                            height: 100%;
+                            right: 0;
+                            top: 0;
+                            width: 2px;
+                        }
+
+                        .military-base-top-border {
+                            left: 0;
+                            height: 2px;
+                            top: 0;
+                            width: 100%;
+                        }
+
+                        .military-base-bottom-border {
+                            bottom: 0;
+                            left: 0;
+                            height: 2px;
+                            width: 100%;
+                        }
+                    }
                 }
 
                 .tile-unlockable {

@@ -119,6 +119,44 @@ return [
         ],
     ],
 
+    'military_armory' => [
+        'base_floor' => 0,
+
+        'base_upkeep' => [
+            'money' => 150,
+        ],
+
+        'base_cost' => [
+            'money' => 1000,
+            'steel' => 500,
+            'concrete' => 400,
+        ],
+
+        'weapon_capacity' => 1000,
+        'ammo_capacity' => 100000,
+    ],
+
+    'military_mixed_barracks' => [
+        'base_floor' => 0,
+        'base_housing' => 30,
+
+        'base_upkeep' => [
+            'money' => 100,
+        ],
+
+        'base_cost' => [
+            'money' => 700,
+            'steel' => 200,
+            'concrete' => 300,
+        ],
+
+        'base_jobs' => [
+            'military_soldier' => 20,
+            'military_officer' => 5,
+            'military_high_graded' => 5,
+        ],
+    ],
+
     'milk_factory' => [
         'base_floor' => 0,
 
