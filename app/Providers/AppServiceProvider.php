@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Managers\AnimalManager;
 use App\Managers\BuildingManager;
 use App\Managers\PopManager;
 use App\Managers\TileManager;
@@ -14,6 +15,7 @@ class AppServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
+        $this->app->singleton('animal.manager', fn () => new AnimalManager());
         $this->app->singleton('building.manager', fn () => new BuildingManager());
         $this->app->singleton('pop.manager', fn () => new PopManager());
         $this->app->singleton('tile.manager', fn () => new TileManager());

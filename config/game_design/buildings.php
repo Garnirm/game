@@ -21,6 +21,7 @@ return [
 
         'base_capacity_animals' => [
             'beef' => 40,
+            'cow' => 40,
         ],
 
         'base_jobs' => [
@@ -115,6 +116,23 @@ return [
         'base_cost' => [
             'money' => 700,
             'concrete' => 250,
+        ],
+    ],
+
+    'milk_factory' => [
+        'base_floor' => 0,
+
+        'base_upkeep' => [
+            'money' => 500,
+        ],
+
+        'base_cost' => [
+            'money' => 10000,
+            'steel' => 1000
+        ],
+
+        'base_jobs' => [
+            'milk_worker' => 10,
         ],
     ],
 

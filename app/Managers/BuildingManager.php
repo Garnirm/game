@@ -48,8 +48,6 @@ class BuildingManager
         $building->base_capacity_vehicle = $base_capacity_vehicle;
         $building->save();
 
-        app(UpdateSave::class)->handle($save, $building);
-
         foreach ($jobs as $job => $amount) {
             $job_model = new Job();
             $job_model->save_id = $save->id;

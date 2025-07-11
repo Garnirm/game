@@ -2,6 +2,7 @@
 
 namespace App\Actions\Save;
 
+use App\Facades\Animal as AnimalFacade;
 use App\Facades\Building as BuildingFacade;
 use App\Facades\Pop as PopFacade;
 use App\Facades\Tile as TileFacade;
@@ -49,6 +50,7 @@ class CreateAction
 
         $buildings = config('game_design.start.buildings');
         $pops = config('game_design.start.pops');
+        $animals = config('game_design.start.animals');
         $roads = config('game_design.start.roads');
         $start_tiles = config('game_design.start.tiles');
 
@@ -107,6 +109,27 @@ class CreateAction
             foreach ($pops_classes as $class => $data_class) {
                 PopFacade::create(save: $save, player: $player, building: $building, class: $class, amount: $data_class['amount'], jobs: $data_class['jobs'] ?? []);
             }
+        }
+
+        foreach ($animals as $animal) {
+            [ $x, $y ] = explode('_', $animal['building_coordinates']);
+
+            $x = (int) $x;
+            $y = (int) $y;
+
+            $building = Building::query()->where('player_id', $player->id)
+                ->where('coordinates', 'elemMatch', [
+                    'x' => [ '$eq' => $x ],
+                    'y' => [ '$eq' => $y ],
+                ])
+                ->first();
+
+            AnimalFacade::create(
+                save: $save, player: $player, type: $animal['animal'], amount: $animal['amount'], building: $building,
+                upkeep: config('game_design.animals.'.$animal['animal'].'.base_upkeep', []),
+                production: config('game_design.animals.'.$animal['animal'].'.base_production', []),
+                cost: config('game_design.animals.'.$animal['animal'].'.base_cost', []),
+            );
         }
 
         app(UpdatePlayerProduction::class)->handle($player);

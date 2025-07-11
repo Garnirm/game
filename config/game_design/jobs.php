@@ -20,6 +20,14 @@ return [
         'pop_class' => 'elite',
         'production' => [ 'influence' => 10 ],
     ],
+    'milk_worker' => [
+        'label' => 'Ouvrier laitier',
+        'pop_class' => 'worker',
+        'cow_handling' => 20,
+        'upkeep' => [
+            'money' => 30,
+        ],
+    ],
     'teacher' => [
         'label' => 'Professeur',
         'pop_class' => 'specialist',

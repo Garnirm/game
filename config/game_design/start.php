@@ -6,10 +6,17 @@ return [
         'concrete' => [ 'easy' => 4000000, 'normal' => 3000000, 'hard' => 2000000 ], // Béton
         'food' => [ 'easy' => 300000, 'normal' => 200000, 'hard' => 100000 ], // Nourriture
         'wheat' => [ 'easy' => 10000, 'normal' => 5000, 'hard' => 2500 ], // Blé
+        'milk' => [ 'easy' => 10000, 'normal' => 5000, 'hard' => 2500 ], // Lait
+        'cheese' => [ 'easy' => 10000, 'normal' => 5000, 'hard' => 2500 ], // Fromage
         'influence' => [ 'easy' => 100, 'normal' => 50, 'hard' => 20 ],
         'money' => [ 'easy' => 5000000, 'normal' => 2000000, 'hard' => 1000000 ],
         'steel' => [ 'easy' => 500000, 'normal' => 250000, 'hard' => 100000 ], // Acier
         'wood' => [ 'easy' => 50000, 'normal' => 25000, 'hard' => 10000 ], // Bois
+    ],
+
+    'animals' => [
+        [ 'animal' => 'cow', 'amount' => 40, 'building_coordinates' => '-4_-2' ],
+        [ 'animal' => 'beef', 'amount' => 40, 'building_coordinates' => '-4_-2' ],
     ],
 
     'buildings' => [
@@ -35,6 +42,7 @@ return [
         [ 'name' => 'Exploitation bovine', 'type' => 'beef_farm', 'id' => 'Exploitation bovine 1', 'tiles' => [ 'neg4_neg2', 'neg4_neg3' ] ],
         [ 'name' => 'Abattoir bovin', 'type' => 'beef_slaughterhouse', 'id' => 'Abattoir bovin 1', 'tiles' => [ 'neg4_0' ] ],
         [ 'name' => 'Ecole', 'type' => 'school', 'id' => 'Ecole 1', 'tiles' => [ '0_1' ] ],
+        [ 'name' => 'Usine laitière', 'type' => 'milk_factory', 'id' => 'Usine laitière 1', 'tiles' => [ 'neg5_neg2' ] ],
     ],
 
     'pops' => [
@@ -58,6 +66,7 @@ return [
                     [ 'job' => 'wheat_farmer', 'building_coordinates' => '-2_-2', 'amount' => 1 ],
                     [ 'job' => 'beef_farmer', 'building_coordinates' => '-4_-2', 'amount' => 2 ],
                     [ 'job' => 'beef_slaughterhouse_employee', 'building_coordinates' => '-4_0', 'amount' => 10 ],
+                    [ 'job' => 'milk_worker', 'building_coordinates' => '-5_-2', 'amount' => 2 ],
                 ],
             ],
             'child' => [
@@ -117,6 +126,7 @@ return [
         [ 'name' => 'neg4_neg1', 'coord_x' => -4, 'coord_y' => -1, 'type' => 'building', 'biome' => 'plains' ],
         [ 'name' => 'neg4_0', 'coord_x' => -4, 'coord_y' => 0, 'type' => 'building', 'biome' => 'plains' ],
 
+        [ 'name' => 'neg5_neg2', 'coord_x' => -5, 'coord_y' => -2, 'type' => 'building', 'biome' => 'plains' ],
         [ 'name' => 'neg5_neg1', 'coord_x' => -5, 'coord_y' => -1, 'type' => 'building', 'biome' => 'plains' ],
     ],
 ];
