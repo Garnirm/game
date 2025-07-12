@@ -5,17 +5,20 @@
         <div class="game-body">
             <sidebar-left />
             <Map />
+
+            <bottom-bar />
         </div>
     </div>
 </template>
 
 <script>
+import BottomBar from './game/BottomBar.vue'
 import Header from './game/Header.vue'
 import Map from './game/Map.vue'
 import SidebarLeft from './game/SidebarLeft.vue'
 
 export default {
-    components: { Header, Map, SidebarLeft },
+    components: { BottomBar, Header, Map, SidebarLeft },
 
     computed: {
         save_id: function () { return this.$store.getters['game/get_save_id'] },
@@ -67,6 +70,7 @@ export default {
     .game-body {
         display: flex;
         height: calc(100vh - 96px);
+        position: relative;
         width: 100%;
     }
 }
