@@ -18,6 +18,8 @@
                     <div>
                         <sprite-green-triangle :orientation="90" @click="navigate('right')" />
                     </div>
+
+                    <div class="navigation-border-right">&nbsp;</div>
                 </div>
             </div>
         </div>
@@ -51,13 +53,13 @@ export default {
             let y = parseInt(split[1])
 
             if (direction === 'top') {
-                y--
+                y -= this.interval_navigation
             } else if (direction === 'left') {
-                x--
+                x -= this.interval_navigation
             } else if (direction === 'bottom') {
-                y++
+                y += this.interval_navigation
             } else if (direction === 'right') {
-                x++
+                x += this.interval_navigation
             }
 
             this.coord_position_view = x+'/'+y
@@ -68,10 +70,11 @@ export default {
 
 <style lang="scss" scoped>
 .game-bottom-bar {
-    bottom: 48px;
+    bottom: 32px;
     left: 300px;
     position: absolute;
     width: calc(100% - 300px);
+    z-index: 2;
 
     .bottom-bar-container {
         display: flex;
@@ -82,9 +85,9 @@ export default {
             background-color: rgba(50, 28, 178, 0.95);
             border-radius: 32px;
             display: flex;
-            height: 180px;
+            height: 160px;
             justify-content: space-between;
-            padding-left: 32px;
+            padding-left: 24px;
             padding-right: 32px;
             position: relative;
             width: 80%;
@@ -92,8 +95,9 @@ export default {
             .bottom-bar-navigation {
                 align-items: center;
                 display: flex;
+                height: 100%;
 
-                div {
+                div:not(.navigation-border-right) {
                     display: flex;
                     flex-direction: column;
 
@@ -101,14 +105,29 @@ export default {
                         align-items: center;
 
                         input {
-                            margin: 16px;
-                            width: 65px;
+                            -moz-appearance: textfield;
+
+                            margin: 8px;
+                            width: 45px;
+
+                            &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+                                -webkit-appearance: none;
+                                margin: 0;
+                            }
                         }
                     }
 
                     svg {
                         cursor: pointer;
                     }
+                }
+
+                .navigation-border-right {
+                    background-color: gray;
+                    border-radius: 2px;
+                    height: 80%;
+                    margin-left: 24px;
+                    width: 4px;
                 }
             }
         }

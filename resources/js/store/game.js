@@ -5,10 +5,15 @@ var housing_consumption = {}
 
 var tour = null
 var save_name = null
+var screen = 'game'
 
 // Getters
 function get_save_id (state) {
     return state.save_id
+}
+
+function get_screen (state) {
+    return state.screen
 }
 
 function get_tour (state) {
@@ -30,6 +35,10 @@ function set_save_id (state, save_id) {
     state.save_id = save_id
 }
 
+function set_screen (state, screen) {
+    state.screen = screen
+}
+
 function set_tour (state, tour) {
     state.tour = tour
 }
@@ -44,13 +53,13 @@ function load_housing_consumption (state, housing_consumption) {
 
 // Export
 export const stateGame = {
-    save_id, tour, save_name, housing_consumption,
+    save_id, tour, save_name, housing_consumption, screen,
 }
 
 export const gettersGame = {
-    get_save_id, get_tour, get_save_name, get_housing_consumption,
+    get_save_id, get_tour, get_save_name, get_housing_consumption, get_screen,
 }
 
 export const mutationsGame = {
-    set_save_id, set_tour, set_save_name, load_housing_consumption,
+    set_save_id, set_tour, set_save_name, load_housing_consumption, set_screen,
 }
